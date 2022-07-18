@@ -1,3 +1,17 @@
+
+
+
+function reflex_refreshLayout() {
+	for(var i = 0; i < array_length(global.reflex.rootControls); i++) {
+		reflex_calculateBoxModels(global.reflex.rootControls[i]);		
+	}
+	
+	for(var i = 0; i < array_length(global.reflex.rootControls); i++) {
+		reflex_cacheBoxModels(global.reflex.rootControls[i]);
+	}
+}
+
+
 function reflex_maxWidth(_control, _parentBox = noone) {
 	var _padding = _control.boxModel.padding.left + _control.boxModel.padding.right;
 	var _margin = _control.boxModel.margin.left + _control.boxModel.margin.right;
@@ -80,5 +94,13 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 		);
 	}
 	
-	
+}
+
+function reflex_cacheBoxModels(_control) {
+	_control.boxModel.calculateAreas();
+	if(is_array(_control.children) && array_length(_control.children) > 0) {
+		for(var i = 0; i < array_length(_control.children); i++) {
+			reflex_cacheBoxModels(_control.children[i]);
+		}
+	}
 }

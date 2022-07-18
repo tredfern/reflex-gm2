@@ -21,9 +21,8 @@ function reflex_drawAll() {
 
 function reflex_processStep() {
 	if (global.reflex.hasUpdates) {
-		for(var i = 0; i < array_length(global.reflex.rootControls); i++) {
-			reflex_calculateBoxModels(global.reflex.rootControls[i]);		
-		}
+		reflex_refreshLayout();
+		
 		global.reflex.hasUpdates = false;
 	}
 }
@@ -35,7 +34,7 @@ function reflex_drawControl(_control) {
 	}
 	
 	if(variable_struct_exists(_control, "onDraw")) {
-		_control.onDraw(_control.boxModel.getContentRect());
+		_control.onDraw(_control.boxModel.contentRect);
 	}
 	
 	if(is_array(_control.children)) {
@@ -46,7 +45,7 @@ function reflex_drawControl(_control) {
 }
 
 function reflex_drawBackground(_control) {
-	var _rect = _control.boxModel.getControlRect();
+	var _rect = _control.boxModel.controlRect;
 	draw_rectangle_color(_rect.left, _rect.top, _rect.right, _rect.bottom,
 		_control.backgroundColor, _control.backgroundColor, _control.backgroundColor, _control.backgroundColor,
 		false);

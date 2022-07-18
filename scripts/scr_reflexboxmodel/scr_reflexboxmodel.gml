@@ -45,6 +45,11 @@ function ReflexBoxModel(_control, _parentBox = noone) : ReflexRect(0, 0, 0, 0) c
 		return parent.getContentRect();
 	}
 	
+	static calculateAreas = function() {
+		controlRect = getControlRect();
+		contentRect = getContentRect();
+	}
+	
 	static getControlRect = function() {
 		var _parent = getParentContentRect();
 		var _l = _parent.left + control.x + margin.left;
