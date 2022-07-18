@@ -13,9 +13,9 @@ function structMergeValues(_base, _override) {
 	var _out = {};
 	
 	//Copy base values first
-	structShallowCopy(_out, _base);
+	structShallowCopy(_base, _out);
 	//Copy override values
-	structShallowCopy(_out, _override);
+	structShallowCopy(_override, _out);
 	
 	return _out;
 }

@@ -69,4 +69,13 @@ function ReflexBoxModel(_control, _parentBox = noone) : ReflexRect(0, 0, 0, 0) c
 			_control.top + padding.top + contentHeight);
 	}
 	
+	static getFullArea = function() {
+		var _parent = getParentContentRect();
+		var _l = _parent.left + control.x;
+		var _t = _parent.top + control.y;
+		var _b = _t + contentHeight + padding.bottom + padding.top + margin.top + margin.bottom;
+		var _r = _l + contentWidth + padding.right + padding.left + margin.left + margin.right;
+		
+		return new ReflexRect(_l, _t, _r, _b);
+	}
 }

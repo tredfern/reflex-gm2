@@ -64,7 +64,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 		for(var i = 0; i < array_length(_control.children); i++) {
 			var _child = _control.children[i];
 			reflex_calculateBoxModels(_child, _control.boxModel);
-			var _box = _child.boxModel.getControlRect();
+			var _box = _child.boxModel.getFullArea();
 			
 			// New Line
 			if (_x + _box.getWidth() > _maxWidth) {
@@ -76,7 +76,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 			_child.y = _y;
 			
 			_x += _box.getWidth();
-			_lineHeight = max(_lineHeight, _child.height);
+			_lineHeight = max(_lineHeight, _box.getHeight());
 			_contentWidth = max(_contentWidth, _x);
 			_contentHeight = max(_contentHeight, _y + _lineHeight);
 		}
