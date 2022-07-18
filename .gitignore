@@ -1,0 +1,4 @@
+builds/**/*
+builds/*
+*.swp
+*.swo
