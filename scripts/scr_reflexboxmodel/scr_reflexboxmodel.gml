@@ -18,10 +18,14 @@ function ReflexRect(_left, _top, _right, _bottom) constructor {
 	
 	static getWidth = function() { return right - left; };
 	static getHeight = function() { return bottom - top; };
+	
+	static contains = function(_x, _y) {
+		return left < _x && right > _x && _y > top && _y < bottom;	
+	}
 }
 
 
-function ReflexBoxModel(_control, _parentBox = noone) : ReflexRect(0, 0, 0, 0) constructor {
+function ReflexBoxModel(_control, _parentBox = noone) constructor {
 	control = _control;
 	parent = _parentBox;
 	
@@ -77,5 +81,9 @@ function ReflexBoxModel(_control, _parentBox = noone) : ReflexRect(0, 0, 0, 0) c
 		var _r = _l + contentWidth + padding.right + padding.left + margin.left + margin.right;
 		
 		return new ReflexRect(_l, _t, _r, _b);
+	}
+	
+	static contains = function(_x, _y) {
+		return controlRect.contains(_x, _y);
 	}
 }

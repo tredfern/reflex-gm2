@@ -10,15 +10,18 @@ reflex_render(new ReflexContainer({
 	}, [
 		new ReflexButton({
 			caption: "Hello World",
-			margin: 5
+			margin: 5,
+			onClick: function(_self) { _self.update({ caption: "Clicked!" }) }
 		}),
 		new ReflexButton({
 			caption: "Captain America",
-			margin: 5
+			margin: 5,
+			onClick: function(_self) { _self.update({ caption: "Clicked!" }) }
 		}),
 		new ReflexButton({
 			caption: "Sunshine Days",
-			margin: 5
+			margin: 5,
+			onClick: function(_self) { _self.update({ caption: "Clicked!" }) }
 		}),
 	])
 );

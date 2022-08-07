@@ -5,7 +5,7 @@
 
 enum ReflexButtonStates {
 	up,
-	down
+	down,
 }
 
 function ReflexButton(_props = {}, _children = [], _default = { 
@@ -23,5 +23,10 @@ function ReflexButton(_props = {}, _children = [], _default = {
 	addChild(new ReflexText({ color : color, font : font, text : caption }));
 	update({ backgroundImage : spriteButtonUp });
 	
+	static onUpdate = function() {
+		setChildren([
+			new ReflexText({ color : color, font : font, text : caption })
+		]);
+	}
 }
 

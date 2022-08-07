@@ -9,11 +9,22 @@ function ReflexControl(_props = {}, _children = [], _default = {}) constructor {
 	children = _children;
 	
 	static addChild = function(_control) {
-		array_push(children, _control);	
+		array_push(children, _control);
+		reflex_flagUpdates();
+	}
+	
+	static setChildren = function(_array) {
+		children = _array;
+		reflex_flagUpdates();
 	}
 	
 	static update = function(_props) {
 		structShallowCopy(_props, self);
-		reflex_refreshLayout();
+		reflex_flagUpdates();
+		
+		if(onUpdate != undefined) {
+			onUpdate();	
+		}
 	}
+	
 }

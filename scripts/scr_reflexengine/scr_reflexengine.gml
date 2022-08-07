@@ -6,18 +6,16 @@ global.reflex = {
 	}
 };
 
+function reflex_flagUpdates() {
+	global.reflex.hasUpdates = true;
+}
 
 function reflex_render(_controlTree) {
 	//Traverse all controls, update children parent, find all controls that do not have a parent
 	array_push(global.reflex.rootControls, new ReflexRoot({}, [_controlTree]));
-	global.reflex.hasUpdates = true;
+	reflex_flagUpdates();
 }
 
-function reflex_drawAll() {
-	for(var i = 0; i < array_length(global.reflex.rootControls); i++) {
-		reflex_drawControl(global.reflex.rootControls[i]);	
-	}
-}
 
 function reflex_processStep() {
 	if (global.reflex.hasUpdates) {
@@ -25,40 +23,45 @@ function reflex_processStep() {
 		global.reflex.hasUpdates = false;
 	}
 	
-	// Check Moouse Position
-	var _mouseX = window_mouse_get_x();
-	var _mouseY = window_mouse_get_y();
+	reflex_processInput();	
 	
-	
+	if (global.reflex.hasUpdates) {
+		reflex_refreshLayout();
+		global.reflex.hasUpdates = false;
+	}
 }
 
 
-function reflex_drawControl(_control) {
-	reflex_drawBackground(_control);
-	
-	if(variable_struct_exists(_control, "onDraw")) {
-		_control.onDraw(_control.boxModel.contentRect);
-	}
-	
-	if(is_array(_control.children)) {
-		for(var i = 0; i < array_length(_control.children); i++) {
-			reflex_drawControl(_control.children[i]);	
+function reflex_findControlAtPoint(_x, _y) {
+	//Find first control in most 
+	for(var i = 0; i < array_length(global.reflex.rootControls); i++) {
+		var _control = reflex_findControlAtPointRecur(_x, _y, global.reflex.rootControls[i]);
+		if (_control != noone) {
+			return _control;	
 		}
 	}
+	
+	return noone;
 }
 
-function reflex_drawBackground(_control) {
-	var _rect = _control.boxModel.controlRect;
+function reflex_findControlAtPointRecur(_x, _y, _control) {
 	
-	if (variable_struct_exists(_control, "backgroundImage")) {
-		draw_sprite_stretched_ext(
-			_control.backgroundImage, 0, _rect.left, _rect.top, _rect.getWidth(), _rect.getHeight(),
-			_control.backgroundColor, 1)	
-	} else if (variable_struct_exists(_control, "backgroundColor")) {
-		draw_rectangle_color(_rect.left, _rect.top, _rect.right, _rect.bottom,
-			_control.backgroundColor, _control.backgroundColor, _control.backgroundColor, _control.backgroundColor,
-			false);
+	// If control has children, first search it's children for a match
+	if (array_length(_control.children) > 0) {
+		for(var i = 0; i < array_length(_control.children); i++) {
+			var _result = reflex_findControlAtPointRecur(_x, _y, _control.children[i]);
+			if (_result != noone) {
+				return _result;	
+			}
+		}	
+	} 
+	
+	if(_control.boxModel.contains(_x, _y)) {
+		return _control;	
 	}
 	
+	return noone;
 }
+
+
 

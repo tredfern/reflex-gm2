@@ -6,7 +6,7 @@
     "path": "folders/Reflex/Scripts/Engine.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_reflexLayouts",
+  "name": "scr_reflexInput",
   "tags": [],
   "resourceType": "GMScript",
 }
