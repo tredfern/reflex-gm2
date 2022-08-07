@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 
-reflex_render(new ReflexControlRectangle({
+reflex_render(new ReflexContainer({
 		x : 200,
 		y : 200,
 		backgroundColor : c_ltgray,

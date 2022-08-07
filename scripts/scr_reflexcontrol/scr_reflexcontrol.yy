@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Reflex/Scripts.yy",
+    "name": "Controls",
+    "path": "folders/Reflex/Scripts/Controls.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_reflexControls",
+  "name": "scr_reflexControl",
   "tags": [],
   "resourceType": "GMScript",
 }

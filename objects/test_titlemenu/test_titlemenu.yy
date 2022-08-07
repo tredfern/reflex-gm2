@@ -28,7 +28,7 @@
     "path": "folders/Reflex/TestCases.yy",
   },
   "resourceVersion": "1.0",
-  "name": "test_textWindows",
+  "name": "test_titleMenu",
   "tags": [],
   "resourceType": "GMObject",
 }

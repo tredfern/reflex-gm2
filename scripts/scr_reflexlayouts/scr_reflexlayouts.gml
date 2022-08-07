@@ -12,18 +12,32 @@ function reflex_refreshLayout() {
 }
 
 
-function reflex_maxWidth(_control, _parentBox = noone) {
+function reflex_maxWidth(_control, _parent = noone) {
 	var _padding = _control.boxModel.padding.left + _control.boxModel.padding.right;
 	var _margin = _control.boxModel.margin.left + _control.boxModel.margin.right;
 	
 	if(_control.width >= 0)
 		return _control.width;
 	
-	if(_parentBox != noone) {			
-		return _parentBox.boxModel.contentWidth - _margin - _padding;
+	if(_parent != noone && _parent != undefined) {			
+		return _parent.contentWidth - _margin - _padding;
 	}
 	
 	return display_get_gui_width();
+}
+
+function reflex_maxHeight(_control, _parent = noone) {
+	var _padding = _control.boxModel.padding.top + _control.boxModel.padding.bottom;
+	var _margin = _control.boxModel.margin.top + _control.boxModel.margin.bottom;
+	
+	if(_control.height >= 0)
+		return _control.height;
+	
+	if(_parent != noone) {			
+		return _parent.contentHeight - _margin - _padding;
+	}
+	
+	return display_get_gui_height();
 }
 
 function reflex_calculateWidth(_control, _parentBox, _contentWidth) {
@@ -46,6 +60,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 	
 	
 	if(is_array(_control.children) && array_length(_control.children) > 0) {
+		
 		//Calculate Size based on child
 		_control.boxModel.setContentSize(
 			reflex_maxWidth(_control, _parent),
@@ -72,8 +87,8 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 				_y += _lineHeight;
 				_lineHeight = 0;
 			}
-			_child.x = _x;
-			_child.y = _y;
+			_child.x = reflex_align(_child.halign, _x, _maxWidth, _box.getWidth());
+			_child.y = reflex_align(_child.valign, _y, reflex_maxHeight(_child, _control.boxModel), _box.getHeight());
 			
 			_x += _box.getWidth();
 			_lineHeight = max(_lineHeight, _box.getHeight());
@@ -103,4 +118,17 @@ function reflex_cacheBoxModels(_control) {
 			reflex_cacheBoxModels(_control.children[i]);
 		}
 	}
+}
+
+function reflex_align(_alignment, _min, _max, _size) {
+	if (_alignment == fa_left || _alignment == fa_top)
+		return _min;
+	
+	if (_alignment == fa_middle || _alignment == fa_center)
+		return (_max - _min - _size) / 2;
+		
+	if (_alignment == fa_right || _alignment == fa_bottom)
+		return _max - _size;
+	
+	return _min;
 }
