@@ -1,11 +1,13 @@
 {
   "resources": [
+    {"id":{"name":"scr_reflexSearch","path":"scripts/scr_reflexSearch/scr_reflexSearch.yy",},"order":6,},
     {"id":{"name":"fnt_defaultText","path":"fonts/fnt_defaultText/fnt_defaultText.yy",},"order":0,},
     {"id":{"name":"spr_buttonShadedDown","path":"sprites/spr_buttonShadedDown/spr_buttonShadedDown.yy",},"order":0,},
     {"id":{"name":"scr_reflexInput","path":"scripts/scr_reflexInput/scr_reflexInput.yy",},"order":4,},
     {"id":{"name":"test_buttons","path":"objects/test_buttons/test_buttons.yy",},"order":3,},
     {"id":{"name":"spr_buttonHalfShadeUp","path":"sprites/spr_buttonHalfShadeUp/spr_buttonHalfShadeUp.yy",},"order":7,},
     {"id":{"name":"scr_reflexControl","path":"scripts/scr_reflexControl/scr_reflexControl.yy",},"order":3,},
+    {"id":{"name":"scr_reflexEvents","path":"scripts/scr_reflexEvents/scr_reflexEvents.yy",},"order":5,},
     {"id":{"name":"scr_reflexContainer","path":"scripts/scr_reflexContainer/scr_reflexContainer.yy",},"order":4,},
     {"id":{"name":"spr_buttonGrayDown","path":"sprites/spr_buttonGrayDown/spr_buttonGrayDown.yy",},"order":5,},
     {"id":{"name":"test_textWindows","path":"objects/test_textWindows/test_textWindows.yy",},"order":1,},

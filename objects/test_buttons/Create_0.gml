@@ -19,7 +19,9 @@ reflex_render(new ReflexContainer({
 		new ReflexButton({
 			caption: "Hello World",
 			styles: "test_button",
-			onClick: function(_self) { _self.update({ caption: "Clicked!" }) }
+			onClick: function(_self) { 
+				_self.update({ caption: "Clicked!" }) 
+			}
 		}),
 		new ReflexButton({
 			caption: "Captain America",

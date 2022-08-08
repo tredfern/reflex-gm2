@@ -17,16 +17,13 @@ function reflex_processInput() {
 	var _mouseX = window_mouse_get_x();
 	var _mouseY = window_mouse_get_y();
 
-	var mouseOver = reflex_findControlAtPoint(_mouseX, _mouseY);
+	var _mouseOver = reflex_findFirstControlAtPoint(_mouseX, _mouseY);
 	
-	if(mouseOver != noone) {
-		
-		//Handle clicks
-		if(variable_struct_exists(mouseOver, "onClick") && mouse_check_button_pressed(mb_left)) {
-			mouseOver.onClick(mouseOver);
+	if(_mouseOver != noone) {
+		if(mouse_check_button_pressed(mb_left)) {
+			reflex_processClick(_mouseOver);
 		}
 		
-		
-		global.reflexInput.mouseOverControl = mouseOver;
+		global.reflexInput.mouseOverControl = _mouseOver;
 	}
 }
