@@ -1,6 +1,14 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+reflex_stylesheet({
+	test_button: {
+		margin : 5,
+		padding : 20
+	},
+	
+});
+
 
 reflex_render(new ReflexContainer({
 		halign: fa_center,
@@ -10,17 +18,17 @@ reflex_render(new ReflexContainer({
 	}, [
 		new ReflexButton({
 			caption: "Hello World",
-			margin: 5,
+			styles: "test_button",
 			onClick: function(_self) { _self.update({ caption: "Clicked!" }) }
 		}),
 		new ReflexButton({
 			caption: "Captain America",
-			margin: 5,
+			styles: "test_button",
 			onClick: function(_self) { _self.update({ caption: "Clicked!" }) }
 		}),
 		new ReflexButton({
 			caption: "Sunshine Days",
-			margin: 5,
+			styles: "test_button",
 			onClick: function(_self) { _self.update({ caption: "Clicked!" }) }
 		}),
 	])

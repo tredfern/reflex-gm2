@@ -18,6 +18,8 @@
     {"id":{"name":"obj_reflexController","path":"objects/obj_reflexController/obj_reflexController.yy",},"order":0,},
     {"id":{"name":"scr_reflexText","path":"scripts/scr_reflexText/scr_reflexText.yy",},"order":1,},
     {"id":{"name":"scr_reflexDrawing","path":"scripts/scr_reflexDrawing/scr_reflexDrawing.yy",},"order":3,},
+    {"id":{"name":"scr_reflexStyles","path":"scripts/scr_reflexStyles/scr_reflexStyles.yy",},"order":8,},
+    {"id":{"name":"scr_stringExtensions","path":"scripts/scr_stringExtensions/scr_stringExtensions.yy",},"order":3,},
     {"id":{"name":"scr_reflexEngine","path":"scripts/scr_reflexEngine/scr_reflexEngine.yy",},"order":0,},
     {"id":{"name":"scr_reflexRoot","path":"scripts/scr_reflexRoot/scr_reflexRoot.yy",},"order":0,},
     {"id":{"name":"test_titleMenu","path":"objects/test_titleMenu/test_titleMenu.yy",},"order":2,},

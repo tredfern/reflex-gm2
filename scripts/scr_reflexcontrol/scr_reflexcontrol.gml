@@ -4,8 +4,8 @@
 function ReflexControl(_props = {}, _children = [], _default = {}) constructor {
 	structShallowCopy({ x : 0, y :0, width : -1, height : -1, halign: fa_left, valign: fa_top }, self);
 	structShallowCopy(_default, self);
+	reflex_applyStyles(self, variable_struct_get(_props, "styles"));
 	structShallowCopy(_props, self);
-	
 	children = _children;
 	
 	static addChild = function(_control) {

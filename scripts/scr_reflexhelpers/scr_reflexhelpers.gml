@@ -17,6 +17,21 @@ function array_sum(_array, _lambda) {
 	return _sum;
 }
 
+function array_pick(_array, _num) {
+	if(array_length(_array) <= _num)
+		return _array;
+	
+	
+	var _out = [];
+	for(var i = 0; i < _num; i++) {
+		var _ind = irandom(array_length(_array) - 1);
+		array_push(_out, _array[_ind]);
+		array_delete(_array, _ind, 1);
+	}
+	
+	return _out;
+}
+
 
 //Find nearest nth objects
 function instance_nearest_nth(_x, _y, _object, _count) {
@@ -58,12 +73,4 @@ function time_format_mmss(_seconds) {
 			string_replace(string_format(_sec, 2, 0), " ", "0");
 }
 
-
-function tokenString(_string, _tokens) {
-	for(var i = 0; i < array_length(_tokens); i++) {
-		_string = string_replace(_string, "{" + string(i) + "}", string(_tokens[i]));
-	}
-	
-	return _string;
-}
 
