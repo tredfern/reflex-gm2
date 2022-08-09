@@ -3,9 +3,8 @@
 /// Size of the ReflexText component is based on the size of the text
 
 
-function ReflexText(_props = {}, _children = [], 
-	_default = { text : "REFLEX UI TEXT", font : global.reflex.defaults.textFont, color : c_black, alpha : 1 }) :
-	ReflexControl(_props, _children, _default) constructor {
+function ReflexText(_props = {}, _children = []) :
+	ReflexControl("text", _props, _children) constructor {
 	
 	// Set up text size
 	draw_set_font(font);

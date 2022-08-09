@@ -8,17 +8,8 @@ enum ReflexButtonStates {
 	down,
 }
 
-function ReflexButton(_props = {}, _children = [], _default = { 
-		alpha : 1,
-		color : c_black,
-		backgroundColor : c_white,
-		buttonState : ReflexButtonStates.up,
-		spriteButtonUp : spr_buttonGrayUp,
-		spriteButtonDown : spr_buttonGrayDown,
-		caption : "Button",
-		font : fnt_defaultText,
-		padding : 15 }) 
-	: ReflexControl(_props, _children, _default) constructor {
+function ReflexButton(_props = {}, _children = []) 
+	: ReflexControl("button", _props, _children) constructor {
 	
 	addChild(new ReflexText({ color : color, font : font, text : caption }));
 	update({ backgroundImage : spriteButtonUp });

@@ -3,7 +3,7 @@
 /// This allows children to easily map their properties and layout based on the screen GUI dimensions
 
 function ReflexRoot(_props, _children) :
-	ReflexControl(_props, _children) constructor {
+	ReflexControl("root", _props, _children) constructor {
 	x = 0;
 	y = 0;
 	width = display_get_gui_width();

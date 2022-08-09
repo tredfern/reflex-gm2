@@ -7,7 +7,39 @@
 /// on style properties passed in.
 
 global.reflexStyles = {
-	
+	__base: { 
+		x : 0, y :0, width : -1, height : -1, 
+		halign: fa_left, valign: fa_top,
+		alpha: 1,
+		color: c_black,
+		backgroundColor: noone,
+		padding: 0,
+		margin: 0,
+		font: fnt_defaultText
+	},
+	button : {
+		backgroundColor : c_white,
+		buttonState : ReflexButtonStates.up,
+		spriteButtonUp : spr_buttonGrayUp,
+		spriteButtonDown : spr_buttonGrayDown,
+		caption : "Button",
+		padding : 15
+	},
+	container : {
+		
+	},
+	menu : {
+		
+	},
+	menu_option : {
+		
+	},
+	root : {
+		
+	},
+	text : { 
+		text : "REFLEX UI TEXT", 
+	}
 }
 
 function reflex_stylesheet(_stylesheet) {

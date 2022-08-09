@@ -4,9 +4,8 @@
 
 
 
-function ReflexRectangle(_props = {}, _children = [], 
-	_default = { color : c_white, alpha : 1 }) :
-	ReflexControl(_props, _children, _default) constructor {
+function ReflexRectangle(_props = {}, _children = []) :
+	ReflexControl(_props, _children) constructor {
 		
 	static onDraw = function(_rect) {
 		draw_set_alpha(alpha);
