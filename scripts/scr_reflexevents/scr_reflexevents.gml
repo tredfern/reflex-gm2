@@ -8,7 +8,7 @@ function reflex_processClick(_control) {
 		_control.onClick(_control);	
 	} else {
 		// pass to parent
-		if (_control.parent != noone) {
+		if (!variable_struct_empty(_control, "parent")) {
 			reflex_processClick(_control.parent);	
 		}
 	}

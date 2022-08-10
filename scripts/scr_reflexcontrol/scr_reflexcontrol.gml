@@ -11,7 +11,12 @@ function ReflexControl(_name, _props = {}, _children = []) constructor {
 	
 	static addChild = function(_control) {
 		array_push(children, _control);
-		_control.parent = self;
+		_control.setParent(self);
+		reflex_flagUpdates();
+	}
+	
+	static removeChild = function(_control) {
+		array_remove(children, _control);
 		reflex_flagUpdates();
 	}
 	
@@ -45,4 +50,11 @@ function ReflexControl(_name, _props = {}, _children = []) constructor {
 		}
 	}
 	
+	static unrender = function() {
+		reflex_unrender(self);
+	}
+	
+	static render = function() {
+		reflex_render(self);	
+	}
 }

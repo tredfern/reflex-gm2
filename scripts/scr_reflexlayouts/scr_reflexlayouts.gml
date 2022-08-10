@@ -61,6 +61,9 @@ function reflex_calculateHeight(_control, _parentBox, _contentHeight) {
 function reflex_calculateBoxModels(_control, _parent = noone) {
 	_control.boxModel = new ReflexBoxModel(_control, _parent);
 	
+	if(variable_struct_exists(_control, "onLayout")) {
+		_control.onLayout();	
+	}
 	
 	if(is_array(_control.children) && array_length(_control.children) > 0) {
 		

@@ -11,12 +11,12 @@ enum ReflexButtonStates {
 function ReflexButton(_props = {}, _children = []) 
 	: ReflexControl("button", _props, _children) constructor {
 	
-	addChild(new ReflexText({ color : color, font : font, text : caption }));
+	addChild(new ReflexText({ text : caption }));
 	update({ backgroundImage : spriteButtonUp });
 	
 	static onUpdate = function() {
 		setChildren([
-			new ReflexText({ color : color, font : font, text : caption })
+			new ReflexText({ text : caption })
 		]);
 	}
 }

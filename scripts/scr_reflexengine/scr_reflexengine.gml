@@ -21,6 +21,20 @@ function reflex_render(_controlTree) {
 	reflex_flagUpdates();
 }
 
+function reflex_unrender(_controlTree) {
+	if(!variable_struct_empty(_controlTree, "parent")) {
+		_controlTree.parent.removeChild(_controlTree);
+		
+		// If your parent was a root control, than just remove that too
+		if(array_contains(global.reflex.rootControls, _controlTree.parent)) {
+			array_remove(global.reflex.rootControls, _controlTree.parent);	
+		}
+	} else {
+		// Must be a root control, or not rendered at all
+		array_remove(global.reflex.rootControls, _controlTree);	
+	}
+}
+
 
 function reflex_processStep() {
 	if (global.reflex.hasUpdates) {

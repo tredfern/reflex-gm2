@@ -38,8 +38,10 @@ global.reflexStyles = {
 		
 	},
 	menu_option : {
-		halign: fa_center,
-		valign: fa_middle,
+		
+	},
+	menu_option_text : {
+		halign: fa_center	
 	},
 	root : {
 		color: c_black,
@@ -49,6 +51,7 @@ global.reflexStyles = {
 	text : { 
 		text : "REFLEX UI TEXT",
 		display: reflex_display.inline,
+		backgroundColor: noone
 	}
 }
 

@@ -2,6 +2,7 @@
   "resources": [
     {"id":{"name":"scr_reflexSearch","path":"scripts/scr_reflexSearch/scr_reflexSearch.yy",},"order":6,},
     {"id":{"name":"fnt_defaultText","path":"fonts/fnt_defaultText/fnt_defaultText.yy",},"order":0,},
+    {"id":{"name":"scr_arrayExtensions","path":"scripts/scr_arrayExtensions/scr_arrayExtensions.yy",},"order":4,},
     {"id":{"name":"spr_buttonShadedDown","path":"sprites/spr_buttonShadedDown/spr_buttonShadedDown.yy",},"order":0,},
     {"id":{"name":"scr_reflexMenu","path":"scripts/scr_reflexMenu/scr_reflexMenu.yy",},"order":6,},
     {"id":{"name":"scr_reflexInput","path":"scripts/scr_reflexInput/scr_reflexInput.yy",},"order":4,},

@@ -59,4 +59,3 @@ function reflex_findControlsAtPoint(_x, _y) {
 function reflex_findControlAtPointImp(_control, _searchParams) {
 	return _control.boxModel.contains(_searchParams.x, _searchParams.y);
 }
-
