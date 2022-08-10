@@ -6,7 +6,8 @@ reflex_stylesheet({
 		margin : 5,
 		padding : 20,
 		backgroundColor: c_lime,
-		font: fnt_defaultHeading
+		font: fnt_defaultHeading,
+		color: c_black
 	},
 	test_button_window: {
 		halign: fa_center,

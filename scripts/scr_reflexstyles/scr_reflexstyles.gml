@@ -7,7 +7,7 @@
 /// on style properties passed in.
 
 enum reflex_styleProperty {
-	inherit
+	inherit = -32544
 }
 
 global.reflexStyles = {
