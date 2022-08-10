@@ -25,11 +25,11 @@ function reflex_drawControl(_control) {
 function reflex_drawBackground(_control) {
 	var _rect = _control.boxModel.controlRect;
 	
-	if (variable_struct_exists(_control, "backgroundImage")) {
+	if (!variable_struct_empty(_control, "backgroundImage")) {
 		draw_sprite_stretched_ext(
 			_control.backgroundImage, 0, _rect.left, _rect.top, _rect.getWidth(), _rect.getHeight(),
 			_control.backgroundColor, 1)	
-	} else if (variable_struct_exists(_control, "backgroundColor")) {
+	} else if (!variable_struct_empty(_control, "backgroundColor")) {
 		draw_rectangle_color(_rect.left, _rect.top, _rect.right, _rect.bottom,
 			_control.backgroundColor, _control.backgroundColor, _control.backgroundColor, _control.backgroundColor,
 			false);

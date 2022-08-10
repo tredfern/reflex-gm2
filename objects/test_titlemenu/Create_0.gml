@@ -15,19 +15,19 @@ reflex_stylesheet({
 reflex_render(new ReflexMenu({ }, [ 
 		new ReflexMenuOption({
 			styles: "test_menu",
-			caption: "New Game"
+			text: "New Game"
 		}),
 		new ReflexMenuOption({
 			styles: "test_menu_option",
-			caption: "Load Game"
+			text: "Load Game"
 		}),
 		new ReflexMenuOption({
 			styles: "test_menu_option",
-			caption: "Options"
+			text: "Options"
 		}),
 		new ReflexMenuOption({
 			styles: "test_menu_option",
-			caption: "Exit Game"
+			text: "Exit Game"
 		}),
 	])
 );

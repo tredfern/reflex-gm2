@@ -34,9 +34,14 @@ function ReflexControl(_name, _props = {}, _children = []) constructor {
 		}
 	}
 	
+	static setParent = function(_parent) {
+		parent = _parent;
+		reflex_inheritProperties(self);
+	}
+	
 	static setChildrenParent = function() {
-		for(var i = 0; i < array_length(children); i++) {
-			children[i].parent = self;	
+		for(var i = 0; i < array_length(children); i++) {			
+			children[i].setParent(self);	
 		}
 	}
 	

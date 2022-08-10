@@ -4,17 +4,22 @@
 reflex_stylesheet({
 	test_button: {
 		margin : 5,
-		padding : 20
+		padding : 20,
+		backgroundColor: c_lime,
+		font: fnt_defaultHeading
 	},
+	test_button_window: {
+		halign: fa_center,
+		valign: fa_middle,
+		backgroundColor : c_blue,
+		padding: { left : 20, right : 20, top : 10, bottom : 10 }
+	}
 	
 });
 
 
 reflex_render(new ReflexContainer({
-		halign: fa_center,
-		valign: fa_middle,
-		backgroundColor : c_blue,
-		padding: { left : 20, right : 20, top : 10, bottom : 10 },
+		styles: "test_button_window",
 	}, [
 		new ReflexButton({
 			caption: "Hello World",

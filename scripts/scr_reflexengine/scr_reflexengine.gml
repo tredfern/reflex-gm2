@@ -6,6 +6,11 @@ global.reflex = {
 	}
 };
 
+enum reflex_display {
+	block,
+	inline
+}
+
 function reflex_flagUpdates() {
 	global.reflex.hasUpdates = true;
 }

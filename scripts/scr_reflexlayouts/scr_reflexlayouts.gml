@@ -44,7 +44,10 @@ function reflex_calculateWidth(_control, _parentBox, _contentWidth) {
 	if(_control.width >= 0)
 		return _control.width;
 		
-	return _contentWidth;
+	if _control.display == reflex_display.inline 
+		return _contentWidth;
+	
+	return reflex_maxWidth(_control, _parentBox);
 		
 }
 

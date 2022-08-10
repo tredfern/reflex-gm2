@@ -19,3 +19,12 @@ function structMergeValues(_base, _override) {
 	
 	return _out;
 }
+
+function variable_struct_empty(_struct, _name) {
+	if (variable_struct_exists(_struct, _name)) {
+		var _v = variable_struct_get(_struct, _name);
+		return _v == noone;
+	}
+	
+	return true;
+}

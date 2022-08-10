@@ -6,16 +6,21 @@
 /// Each style is struct with properties, structs will be applied to controls on creation based
 /// on style properties passed in.
 
+enum reflex_styleProperty {
+	inherit
+}
+
 global.reflexStyles = {
 	__base: { 
 		x : 0, y :0, width : -1, height : -1, 
 		halign: fa_left, valign: fa_top,
+		display: reflex_display.block,
 		alpha: 1,
-		color: c_black,
-		backgroundColor: noone,
 		padding: 0,
 		margin: 0,
-		font: fnt_defaultText
+		color: reflex_styleProperty.inherit,
+		backgroundColor: reflex_styleProperty.inherit,
+		font: reflex_styleProperty.inherit
 	},
 	button : {
 		backgroundColor : c_white,
@@ -23,7 +28,8 @@ global.reflexStyles = {
 		spriteButtonUp : spr_buttonGrayUp,
 		spriteButtonDown : spr_buttonGrayDown,
 		caption : "Button",
-		padding : 15
+		padding : 15,
+		display: reflex_display.inline
 	},
 	container : {
 		
@@ -32,13 +38,17 @@ global.reflexStyles = {
 		
 	},
 	menu_option : {
-		
+		halign: fa_center,
+		valign: fa_middle,
 	},
 	root : {
-		
+		color: c_black,
+		backgroundColor: noone,
+		font: fnt_defaultText
 	},
 	text : { 
-		text : "REFLEX UI TEXT", 
+		text : "REFLEX UI TEXT",
+		display: reflex_display.inline,
 	}
 }
 
@@ -65,5 +75,22 @@ function reflex_applyStyles(_control, _styleNames) {
 	
 	for(var i = 0; i < array_length(_styles); i++) {
 		structShallowCopy(variable_struct_get(global.reflexStyles, _styles[i]), _control);
+	}
+}
+
+
+
+function reflex_inheritProperties(_control) {
+	if(variable_struct_empty(_control, "parent"))
+		return;
+	
+	var _names = variable_struct_get_names(_control);
+	
+	for(var i = 0; i < array_length(_names); i++) {
+		if variable_struct_get(_control, _names[i]) == reflex_styleProperty.inherit {
+			//Parent should be already overridden if also set to inherit
+			variable_struct_set(_control, _names[i], 
+				variable_struct_get(_control.parent, _names[i]));
+		}
 	}
 }
