@@ -11,6 +11,13 @@ function array_contains(_array, _searchFor) {
 	return false;
 }
 
+function array_empty(_array) {
+	if(is_array(_array))
+		return array_length(_array) == 0;
+	
+	return true;
+}
+
 function array_sum(_array, _lambda) {
 	var _sum = 0;
 	for(var i = 0; i < array_length(_array); i++) {
