@@ -19,7 +19,7 @@ global.reflexStyles = {
 		padding: 0,
 		margin: 0,
 		color: reflex_styleProperty.inherit,
-		backgroundColor: reflex_styleProperty.inherit,
+		backgroundColor: noone,
 		font: reflex_styleProperty.inherit
 	},
 	button : {
@@ -70,7 +70,6 @@ function reflex_stylesheet(_stylesheet) {
 }
 
 function reflex_applyStyles(_control, _styleNames) {
-	
 	if (!is_string(_styleNames))
 		return;
 		
@@ -80,8 +79,6 @@ function reflex_applyStyles(_control, _styleNames) {
 		structShallowCopy(variable_struct_get(global.reflexStyles, _styles[i]), _control);
 	}
 }
-
-
 
 function reflex_inheritProperties(_control) {
 	if(variable_struct_empty(_control, "parent"))

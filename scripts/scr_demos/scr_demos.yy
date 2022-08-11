@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Engine",
-    "path": "folders/Reflex/Scripts/Engine.yy",
+    "name": "Demo",
+    "path": "folders/Reflex/Demo.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_reflexStyles",
+  "name": "scr_demos",
   "tags": [],
   "resourceType": "GMScript",
 }

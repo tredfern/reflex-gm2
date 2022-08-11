@@ -21,6 +21,11 @@ function reflex_render(_controlTree) {
 	reflex_flagUpdates();
 }
 
+function reflex_clear() {
+	global.reflex.rootControls = [];	
+	reflex_flagUpdates();
+}
+
 function reflex_unrender(_controlTree) {
 	if(!variable_struct_empty(_controlTree, "parent")) {
 		_controlTree.parent.removeChild(_controlTree);

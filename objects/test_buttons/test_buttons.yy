@@ -24,8 +24,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "TestCases",
-    "path": "folders/Reflex/TestCases.yy",
+    "name": "Demo",
+    "path": "folders/Reflex/Demo.yy",
   },
   "resourceVersion": "1.0",
   "name": "test_buttons",
