@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"scr_reflexSearch","path":"scripts/scr_reflexSearch/scr_reflexSearch.yy",},"order":6,},
+    {"id":{"name":"spr_blueFrame","path":"sprites/spr_blueFrame/spr_blueFrame.yy",},"order":9,},
     {"id":{"name":"fnt_defaultText","path":"fonts/fnt_defaultText/fnt_defaultText.yy",},"order":0,},
     {"id":{"name":"scr_arrayExtensions","path":"scripts/scr_arrayExtensions/scr_arrayExtensions.yy",},"order":4,},
     {"id":{"name":"spr_buttonShadedDown","path":"sprites/spr_buttonShadedDown/spr_buttonShadedDown.yy",},"order":0,},

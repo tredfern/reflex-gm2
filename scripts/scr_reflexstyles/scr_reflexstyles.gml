@@ -76,7 +76,11 @@ function reflex_applyStyles(_control, _styleNames) {
 	var _styles = string_split(_styleNames, " ");	
 	
 	for(var i = 0; i < array_length(_styles); i++) {
-		structShallowCopy(variable_struct_get(global.reflexStyles, _styles[i]), _control);
+		if(variable_struct_exists(global.reflexStyles, _styles[i])) {
+			structShallowCopy(variable_struct_get(global.reflexStyles, _styles[i]), _control);
+		} else {
+			show_debug_message("Could not apply style: " + _styles[i])	
+		}
 	}
 }
 

@@ -20,14 +20,12 @@ function initializeDemo() {
 			halign: fa_center,
 			valign: fa_middle,
 			padding: 20,
-			display: reflex_display.inline,
-			width: 400
+			display: reflex_display.inline
 		},
 		test_menu_option: {
-			halign: fa_center,
 			color: c_green,
 			padding: 20,
-			font: fnt_defaultHeading
+			font: fnt_defaultText
 		},
 		test_button: {
 			margin : 5,
@@ -36,6 +34,20 @@ function initializeDemo() {
 			font: fnt_defaultHeading,
 			color: c_black,
 			halign: fa_center
+		},
+		character_window : {
+			backgroundImage : spr_frame,
+			width: .75,
+			height: .75,
+			halign: fa_center,
+			valign: fa_middle
+		},
+		heading : {
+			font : fnt_defaultHeading
+		},
+		heading_bar : {
+			color: c_white,
+			backgroundImage : spr_blueFrame
 		}
 	})
 }
@@ -52,7 +64,8 @@ function showTitleScreen() {
 		}),
 		new ReflexMenuOption({
 			styles: "test_menu_option",
-			text: "Load Game"
+			text: "Character Select",
+			onClick: function() { showCharacterSelectDemo(); },
 		}),
 		new ReflexMenuOption({
 			styles: "test_menu_option",
@@ -97,4 +110,17 @@ function showBackButton() {
 		caption : "Back",
 		onClick: function() { showTitleScreen(); }
 	}));
+}
+
+function showCharacterSelectDemo() {
+	reflex_clear();
+	reflex_render(new ReflexContainer({
+		styles : "character_window",
+	}, [
+		new ReflexText({
+			styles: "heading header_bar",
+			text: "Select Character"
+		})
+	]));
+	showBackButton();
 }
