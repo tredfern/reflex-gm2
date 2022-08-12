@@ -93,4 +93,11 @@ function reflex_inheritProperties(_control) {
 				variable_struct_get(_control.parent, _names[i]));
 		}
 	}
+	
+	//Cascade any properties to children
+	if(!array_empty(_control.children)) {
+		for(var i = 0; i < array_length(_control.children); i++) {
+			reflex_inheritProperties(_control.children[i]);
+		}
+	}
 }
