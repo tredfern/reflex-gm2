@@ -55,3 +55,21 @@ function array_remove(_array, _value) {
 	var _index = array_find(_array, _value);
 	array_delete(_array, _index, 1);
 }
+
+function array_onEach(_array, _function) {
+	for(var i = 0; i < array_length(_array); i++) {
+		_function(_array[i]);	
+	}
+}
+
+function array_without(_array, _filter) {
+	var _out = [];
+	
+	for(var i = 0; i < array_length(_array); i++) {
+		if(!array_contains(_filter, _array[i])) {
+			array_push(_out, _array[i]);	
+		}
+	}
+	
+	return _out;
+}

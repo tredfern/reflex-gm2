@@ -38,16 +38,19 @@ function initializeDemo() {
 		character_window : {
 			backgroundImage : spr_frame,
 			width: .75,
-			height: .75,
+			height: .90,
 			halign: fa_center,
 			valign: fa_middle
 		},
 		heading : {
-			font : fnt_defaultHeading
+			font : fnt_defaultHeading,
+			halign: fa_center
 		},
 		heading_bar : {
 			color: c_white,
-			backgroundImage : spr_blueFrame
+			backgroundImage : spr_blueFrame,
+			padding : 10,
+			display: reflex_display.block
 		}
 	})
 }
@@ -114,13 +117,33 @@ function showBackButton() {
 
 function showCharacterSelectDemo() {
 	reflex_clear();
-	reflex_render(new ReflexContainer({
-		styles : "character_window",
-	}, [
-		new ReflexText({
-			styles: "heading header_bar",
-			text: "Select Character"
-		})
-	]));
+	reflex_render(
+		new ReflexContainer({ styles : "character_window" }, [
+			new ReflexContainer({ styles: "heading_bar" }, [
+				new ReflexText({
+					styles: "heading",
+					text: "Select Character"
+				})
+			]),
+			new ReflexContainer({ styles: "character_list" }, [
+				new ReflexContainer({ styles: "character_option" }, [
+					new ReflexImage({ styles: "character_image" }),
+					new ReflexText({ styles: "character_name", text : "Pogo" })
+				]),
+				new ReflexContainer({ styles: "character_option" }, [
+					new ReflexImage({ styles: "character_image" }),
+					new ReflexText({ styles: "character_name", text : "Migo" })
+				]),
+				new ReflexContainer({ styles: "character_option" }, [
+					new ReflexImage({ styles: "character_image" }),
+					new ReflexText({ styles: "character_name", text : "Logo" })
+				]),
+				
+			]),
+			new ReflexContainer({ styles: "character_details" }, [
+			
+			])
+		])
+	);
 	showBackButton();
 }

@@ -18,6 +18,7 @@
     {"id":{"name":"spr_buttonGrayUp","path":"sprites/spr_buttonGrayUp/spr_buttonGrayUp.yy",},"order":4,},
     {"id":{"name":"test_window","path":"objects/test_window/test_window.yy",},"order":0,},
     {"id":{"name":"scr_reflexLayouts","path":"scripts/scr_reflexLayouts/scr_reflexLayouts.yy",},"order":2,},
+    {"id":{"name":"scr_reflexImage","path":"scripts/scr_reflexImage/scr_reflexImage.yy",},"order":7,},
     {"id":{"name":"spr_buttonHalfShadeDown","path":"sprites/spr_buttonHalfShadeDown/spr_buttonHalfShadeDown.yy",},"order":3,},
     {"id":{"name":"scr_reflexStructExtensions","path":"scripts/scr_reflexStructExtensions/scr_reflexStructExtensions.yy",},"order":1,},
     {"id":{"name":"scr_reflexRectangle","path":"scripts/scr_reflexRectangle/scr_reflexRectangle.yy",},"order":5,},

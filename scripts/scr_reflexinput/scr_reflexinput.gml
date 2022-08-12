@@ -8,7 +8,8 @@
 /// 5. Is the gamepad moving and should select another control?
 /// 6. Is a gamepad button down and should trigger the focused control?
 global.reflexInput = {
-	focusedControl : noone
+	focusedControl : noone,
+	mouseOver : noone
 };
 
 function reflex_processInput() {
@@ -19,11 +20,32 @@ function reflex_processInput() {
 	var _mouseOver = reflex_findControlsAtPoint(_mouseX, _mouseY);
 	
 	if(!array_empty(_mouseOver)) {
-		if(mouse_check_button_pressed(mb_left)) {
-			for(var i = 0; i < array_length(_mouseOver); i++) {
-				if reflex_processClick(_mouseOver[i])
-					break;
-			}
-		}
+		reflex_doMouseExit(_mouseOver);
+		reflex_doMouseEnter(_mouseOver);
+		reflex_doMouseOver(_mouseOver);
+		reflex_doClick(_mouseOver);
+		
+		global.reflexInput.mouseOver = _mouseOver;
+	}
+}
+
+function reflex_doMouseExit(_mouseOver) {
+	var _exiting = array_without(global.reflexInput.mouseOver, _mouseOver);
+	array_onEach(_exiting, reflex_processMouseExit);
+}
+
+function reflex_doMouseEnter(_mouseOver) {
+	var _entering = array_without(_mouseOver, global.reflexInput.mouseOver);
+	array_onEach(_entering, reflex_processMouseEnter);
+}
+
+function reflex_doMouseOver(_mouseOver) {
+	array_onEach(_mouseOver, reflex_processMouseOver);
+}
+
+
+function reflex_doClick(_mouseOver) {
+	if(mouse_check_button_pressed(mb_left)) {
+		array_onEach(_mouseOver, reflex_processClick);
 	}
 }

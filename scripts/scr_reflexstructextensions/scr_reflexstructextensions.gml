@@ -1,10 +1,22 @@
 
-// Copies just the high-level values from one struct to another
+/// @function			structShallowCopy
+/// @description		Copies the properties from one struct to another.
+/// @param {struct}		from	The struct to copy values from
+/// @param {struct}		to		The struct to copy values to
+/// @return {struct}	The list of the original values in "to" that were overwritten
 function structShallowCopy(_from, _to) {
 	var _propValues = variable_struct_get_names(_from);
+	var _overwrittenValues = {};
+	
 	for(var i = 0; i < array_length(_propValues); i++) {
-		variable_struct_set(_to, _propValues[i], variable_struct_get(_from, _propValues[i]));	
+		var _name = _propValues[i];
+		if(variable_struct_exists(_to, _name)) {
+			variable_struct_set(_overwrittenValues,_name, variable_struct_get(_to, _name));
+		}
+		variable_struct_set(_to, _name, variable_struct_get(_from, _name));	
 	}	
+	
+	return _overwrittenValues;
 }
 
 

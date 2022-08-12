@@ -16,6 +16,12 @@ function reflex_maxWidth(_control, _parent = noone) {
 	var _padding = _control.boxModel.padding.left + _control.boxModel.padding.right;
 	var _margin = _control.boxModel.margin.left + _control.boxModel.margin.right;
 	
+	//Check for a percentage size
+	if(_control.width > 0 && _control.width < 1) {
+		return _parent.contentWidth * _control.width - _margin - _padding
+	}
+	
+	//Check for a specific width
 	if(_control.width > 1)
 		return _control.width;
 	
@@ -29,6 +35,11 @@ function reflex_maxWidth(_control, _parent = noone) {
 function reflex_maxHeight(_control, _parent = noone) {
 	var _padding = _control.boxModel.padding.top + _control.boxModel.padding.bottom;
 	var _margin = _control.boxModel.margin.top + _control.boxModel.margin.bottom;
+	
+	// Calculate a percentage of parent space
+	if(_control.height > 0 && _control.height < 1) {
+		return _parent.contentHeight * _control.height - _margin - _padding;
+	}
 	
 	if(_control.height > 1)
 		return _control.height;
@@ -91,6 +102,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 		var _y = 0;
 		var _lineHeight = 0;
 		var _maxWidth = _contentArea.getWidth();
+		var _maxHeight = _contentArea.getHeight();
 		
 		for(var i = 0; i < array_length(_control.children); i++) {
 			var _child = _control.children[i];
@@ -104,7 +116,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 				_lineHeight = 0;
 			}
 			_child.x = reflex_align(_child.halign, _x, _maxWidth, _box.getWidth());
-			_child.y = reflex_align(_child.valign, _y, reflex_maxHeight(_child, _control.boxModel), _box.getHeight());
+			_child.y = reflex_align(_child.valign, _y, _maxHeight, _box.getHeight());
 			
 			_x += _box.getWidth();
 			_lineHeight = max(_lineHeight, _box.getHeight());

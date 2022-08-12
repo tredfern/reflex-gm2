@@ -23,13 +23,16 @@ global.reflexStyles = {
 		font: reflex_styleProperty.inherit
 	},
 	button : {
-		backgroundColor : c_white,
+		backgroundColor : c_ltgray,
 		buttonState : ReflexButtonStates.up,
 		spriteButtonUp : spr_buttonGrayUp,
 		spriteButtonDown : spr_buttonGrayDown,
 		caption : "Button",
 		padding : 15,
-		display: reflex_display.inline
+		display: reflex_display.inline,
+		hoverStyle: {
+			backgroundColor : c_white
+		}
 	},
 	container : {
 		
@@ -104,4 +107,26 @@ function reflex_inheritProperties(_control) {
 			reflex_inheritProperties(_control.children[i]);
 		}
 	}
+}
+
+function reflex_applyMouseOverStyle(_control) {
+	if (variable_struct_exists(_control, "hoverStyle")) {
+		var _cache = structShallowCopy(_control.hoverStyle, _control);
+		_control.__hoverStyleCache = _cache;
+	}
+}
+
+function reflex_removeMouseOverStyle(_control) {
+	if(!variable_struct_empty(_control, "__hoverStyleCache")) {
+		structShallowCopy(_control.__hoverStyleCache, _control);
+		_control.__hoverStyleCache = noone;
+	}
+}
+
+function reflex_applyFocusStyle(_control) {
+	
+}
+
+function reflex_removeFocusStyle(_control) {
+	
 }
