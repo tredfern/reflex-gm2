@@ -10,6 +10,7 @@ function reflex_drawAll() {
 
 function reflex_drawControl(_control) {
 	reflex_drawBackground(_control);
+	reflex_drawBorder(_control);
 	
 	if(variable_struct_exists(_control, "onDraw")) {
 		_control.onDraw(_control.boxModel.contentRect);
@@ -34,5 +35,24 @@ function reflex_drawBackground(_control) {
 			_control.backgroundColor, _control.backgroundColor, _control.backgroundColor, _control.backgroundColor,
 			false);
 	}
-	
+}
+
+function reflex_drawBorder(_control) {
+	if(!variable_struct_empty(_control, "borderColor")) {
+		var _r = _control.boxModel.controlRect;
+		var _border = _control.boxModel.border;
+		var _color = variable_struct_get(_control, "borderColor");
+		// Draw left
+		draw_line_width_color(_r.left, _r.top, _r.left, _r.bottom, _border.left, _color, _color);
+		
+		// Draw top
+		draw_line_width_color(_r.left, _r.top, _r.right, _r.top, _border.top, _color, _color);
+		
+		// draw right
+		draw_line_width_color(_r.right, _r.top, _r.right, _r.bottom, _border.right, _color, _color);
+		
+		// draw bottom
+		draw_line_width_color(_r.left, _r.bottom, _r.right, _r.bottom, _border.bottom, _color, _color);
+		
+	}
 }

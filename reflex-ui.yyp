@@ -27,6 +27,7 @@
     {"id":{"name":"spr_frame","path":"sprites/spr_frame/spr_frame.yy",},"order":8,},
     {"id":{"name":"spr_reflexDemoPortrait3","path":"sprites/spr_reflexDemoPortrait3/spr_reflexDemoPortrait3.yy",},"order":2,},
     {"id":{"name":"scr_reflexText","path":"scripts/scr_reflexText/scr_reflexText.yy",},"order":1,},
+    {"id":{"name":"fnt_demoStats","path":"fonts/fnt_demoStats/fnt_demoStats.yy",},"order":2,},
     {"id":{"name":"scr_reflexDrawing","path":"scripts/scr_reflexDrawing/scr_reflexDrawing.yy",},"order":3,},
     {"id":{"name":"scr_reflexStyles","path":"scripts/scr_reflexStyles/scr_reflexStyles.yy",},"order":7,},
     {"id":{"name":"scr_stringExtensions","path":"scripts/scr_stringExtensions/scr_stringExtensions.yy",},"order":3,},

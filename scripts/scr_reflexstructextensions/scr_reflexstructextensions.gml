@@ -32,6 +32,22 @@ function structMergeValues(_base, _override) {
 	return _out;
 }
 
+function struct_match(_a, _b) {
+	// Count number of names
+	if variable_struct_names_count(_a) != variable_struct_names_count(_b) {
+		return false;
+	}
+	
+	var _names = variable_struct_get_names(_a);
+	for(var i = 0; i < array_length(_names); i ++) {
+		if variable_struct_get(_a, _names[i]) != variable_struct_get(_b, _names[i]) {
+			return false;
+		}
+	}
+	
+	return true;
+}
+
 function variable_struct_empty(_struct, _name) {
 	if (variable_struct_exists(_struct, _name)) {
 		var _v = variable_struct_get(_struct, _name);

@@ -35,6 +35,7 @@ function ReflexBoxModel(_control, _parentBox = noone) constructor {
 	contentHeight = 0;
 	margin = reflex_createBoundaryRect(variable_struct_get(_control, "margin"));
 	padding = reflex_createBoundaryRect(variable_struct_get(_control, "padding"));
+	border = reflex_createBoundaryRect(variable_struct_get(_control, "border"));
 	
 	static setContentSize = function(_w, _h) {
 		contentWidth = _w;
@@ -58,8 +59,8 @@ function ReflexBoxModel(_control, _parentBox = noone) constructor {
 		var _parent = getParentContentRect();
 		var _l = _parent.left + control.x + margin.left;
 		var _t = _parent.top + control.y + margin.top;
-		var _b = _t + contentHeight + padding.bottom + padding.top;
-		var _r = _l + contentWidth + padding.right + padding.left;
+		var _b = _t + contentHeight + padding.bottom + padding.top + border.top + border.bottom;
+		var _r = _l + contentWidth + padding.right + padding.left + border.left + border.right;
 		
 		return new ReflexRect(_l, _t, _r, _b);
 	}
@@ -68,17 +69,17 @@ function ReflexBoxModel(_control, _parentBox = noone) constructor {
 		var _control = getControlRect();
 		
 		return new ReflexRect(
-			_control.left + padding.left, _control.top + padding.top,
-			_control.left + padding.left + contentWidth,
-			_control.top + padding.top + contentHeight);
+			_control.left + padding.left + border.left, _control.top + padding.top + border.top,
+			_control.left + padding.left + border.left + contentWidth,
+			_control.top + padding.top + border.top + contentHeight);
 	}
 	
 	static getFullArea = function() {
 		var _parent = getParentContentRect();
 		var _l = _parent.left + control.x;
 		var _t = _parent.top + control.y;
-		var _b = _t + contentHeight + padding.bottom + padding.top + margin.top + margin.bottom;
-		var _r = _l + contentWidth + padding.right + padding.left + margin.left + margin.right;
+		var _b = _t + contentHeight + padding.bottom + padding.top + margin.top + margin.bottom + border.top + border.bottom;
+		var _r = _l + contentWidth + padding.right + padding.left + margin.left + margin.right + border.left + border.right;
 		
 		return new ReflexRect(_l, _t, _r, _b);
 	}

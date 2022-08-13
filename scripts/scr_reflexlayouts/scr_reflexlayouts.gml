@@ -15,10 +15,11 @@ function reflex_refreshLayout() {
 function reflex_maxWidth(_control, _parent = noone) {
 	var _padding = _control.boxModel.padding.left + _control.boxModel.padding.right;
 	var _margin = _control.boxModel.margin.left + _control.boxModel.margin.right;
+	var _border = _control.boxModel.border.left + _control.boxModel.border.right;
 	
 	//Check for a percentage size
 	if(_control.width > 0 && _control.width < 1) {
-		return _parent.contentWidth * _control.width - _margin - _padding
+		return _parent.contentWidth * _control.width - _margin - _padding - _border
 	}
 	
 	//Check for a specific width
@@ -26,7 +27,7 @@ function reflex_maxWidth(_control, _parent = noone) {
 		return _control.width;
 	
 	if(_parent != noone && _parent != undefined) {			
-		return _parent.contentWidth - _margin - _padding;
+		return _parent.contentWidth - _margin - _padding - _border;
 	}
 	
 	return display_get_gui_width();
@@ -35,17 +36,18 @@ function reflex_maxWidth(_control, _parent = noone) {
 function reflex_maxHeight(_control, _parent = noone) {
 	var _padding = _control.boxModel.padding.top + _control.boxModel.padding.bottom;
 	var _margin = _control.boxModel.margin.top + _control.boxModel.margin.bottom;
+	var _border = _control.boxModel.border.top + _control.boxModel.border.bottom;
 	
 	// Calculate a percentage of parent space
 	if(_control.height > 0 && _control.height < 1) {
-		return _parent.contentHeight * _control.height - _margin - _padding;
+		return _parent.contentHeight * _control.height - _margin - _padding - _border;
 	}
 	
 	if(_control.height > 1)
 		return _control.height;
 	
 	if(_parent != noone) {			
-		return _parent.contentHeight - _margin - _padding;
+		return _parent.contentHeight - _margin - _padding - _border;
 	}
 	
 	return display_get_gui_height();
@@ -83,7 +85,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 	_control.boxModel = new ReflexBoxModel(_control, _parent);
 	
 	if(variable_struct_exists(_control, "onLayout")) {
-		_control.onLayout();	
+		_control.onLayout(_control.boxModel);	
 	}
 	
 	if(is_array(_control.children) && array_length(_control.children) > 0) {
@@ -118,7 +120,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 			_child.x = reflex_align(_child.halign, _x, _maxWidth, _box.getWidth());
 			_child.y = reflex_align(_child.valign, _y, _maxHeight, _box.getHeight());
 			
-			_x += _box.getWidth();
+			_x = _child.x + _box.getWidth();
 			_lineHeight = max(_lineHeight, _box.getHeight());
 			_contentWidth = max(_contentWidth, _x);
 			_contentHeight = max(_contentHeight, _y + _lineHeight);
@@ -130,10 +132,9 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 		);
 		
 	} else {
-		//Calculate width by default
 		_control.boxModel.setContentSize(
-			reflex_calculateWidth(_control, _parent, 0),
-			reflex_calculateHeight(_control, _parent, 0)
+			reflex_calculateWidth(_control, _parent, _control.boxModel.contentWidth),
+			reflex_calculateHeight(_control, _parent, _control.boxModel.contentHeight)
 		);
 	}
 	

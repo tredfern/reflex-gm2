@@ -40,16 +40,23 @@ function initializeDemo() {
 			width: .75,
 			height: .90,
 			halign: fa_center,
-			valign: fa_middle
+			valign: fa_middle,
+			font: fnt_demoStats
 		},
 		character_option : {
 			backgroundColor : c_olive,
 			display: reflex_display.inline,
-			width: 200,
-			height: 200,
+			width: 220,
+			height: 220,
 			margin: 1,
+			focusOrder: REFLEX_AUTO,
+			border: 3,
+			borderColor: noone,
 			hoverStyle: {
 				backgroundColor : color_lighten(c_olive, 1.25)	
+			},
+			focusStyle: {
+				borderColor	: c_black
 			}
 		},
 		character_image : {
@@ -63,6 +70,18 @@ function initializeDemo() {
 			halign: fa_center,
 			valign: fa_bottom,
 			margin: { top: 5, bottom: 5 }
+		},
+		character_details : {
+			valign: fa_bottom,
+			height: 226,
+			backgroundColor: c_gray
+		},
+		character_stats: {
+			display: reflex_display.inline,
+			valign: fa_middle
+		},
+		character_stat: {
+			margin: { top: 10, left: 10 }
 		},
 		heading : {
 			font : fnt_defaultHeading,
@@ -148,24 +167,48 @@ function showCharacterSelectDemo() {
 				})
 			]),
 			new ReflexContainer({ styles: "character_list" }, [
-				new ReflexContainer({ styles: "character_option" }, [
-					new ReflexImage({ styles: "character_image", image: spr_reflexDemoPortrait1 }),
-					new ReflexText({ styles: "character_name", text : "Pogo" })
-				]),
-				new ReflexContainer({ styles: "character_option" }, [
-					new ReflexImage({ styles: "character_image", image: spr_reflexDemoPortrait2 }),
-					new ReflexText({ styles: "character_name", text : "Migo" })
-				]),
-				new ReflexContainer({ styles: "character_option" }, [
-					new ReflexImage({ styles: "character_image", image: spr_reflexDemoPortrait3 }),
-					new ReflexText({ styles: "character_name", text : "Logo" })
-				]),
-				
+				createCharacterOption("Pogo", spr_reflexDemoPortrait1, 100, 25, 12, "Average character with no weaknesses"),
+				createCharacterOption("Migo", spr_reflexDemoPortrait2, 80, 35, 8, "Glass cannon ready to take down anyone"),
+				createCharacterOption("Logo", spr_reflexDemoPortrait3, 140, 20, 15, "Defensive fortress that can soak up damage")				
 			]),
-			new ReflexContainer({ styles: "character_details" }, [
-			
-			])
+			new ReflexContainer({
+				id: "character_details", 
+				styles: "character_details",
+				onUpdate : function(_self) {
+					if(!variable_struct_empty(_self, "characterStats")) {
+						_self.setChildren([
+							new ReflexContainer({styles : "character_option", valign: fa_middle, focusOrder: REFLEX_OFF }, [ 
+								new ReflexImage({ styles: "character_image", image: _self.characterStats.image }),
+								new ReflexText({ styles: "character_name", text: _self.characterStats.name }),
+								
+							]),
+							new ReflexContainer({ styles: "character_stats" }, [
+								new ReflexText({ styles: "character_stat", text: "HP: " + string(_self.characterStats.hp) }),
+								new ReflexText({ styles: "character_stat", text: "ATK: " + string(_self.characterStats.atk) }),
+								new ReflexText({ styles: "character_stat", text: "DEF: " + string(_self.characterStats.def) }),
+								new ReflexText({ styles: "character_stat", text: _self.characterStats.desc }),
+							])
+						]);
+					}
+				}
+			}, [])
 		])
 	);
 	showBackButton();
+}
+
+function createCharacterOption(_name, _image, _hp, _atk, _def, _desc) {
+	return new ReflexContainer({ 
+		characterStats : { name: _name, image: _image, hp : _hp, atk: _atk, def : _def, desc: _desc },
+		styles: "character_option", 
+		onFocus : function(_self) { updateCharacterDetails(_self.characterStats) }
+	}, [
+		new ReflexImage({ styles: "character_image", image: _image }),
+		new ReflexText({ styles: "character_name", text : _name })
+	]);
+}
+
+function updateCharacterDetails(_characterStats) {
+	var _details = reflex_findById("character_details");
+	_details.update({ characterStats : _characterStats });
 }

@@ -6,11 +6,13 @@
 function ReflexText(_props = {}, _children = []) :
 	ReflexControl("text", _props, _children) constructor {
 	
-	static onLayout = function() {
+	static onLayout = function(_boxModel) {
 		// Set up text size
 		draw_set_font(font);
-		width = string_width(text);
-		height = string_height(text);
+		_boxModel.setContentSize(
+			string_width(text),
+			string_height(text)
+		);
 	}
 
 	static onDraw = function(_rect) {

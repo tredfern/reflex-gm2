@@ -31,11 +31,16 @@ function ReflexControl(_name, _props = {}, _children = []) constructor {
 	}
 	
 	static update = function(_props) {
-		structShallowCopy(_props, self);
+		var _changed = structShallowCopy(_props, self);
+		
+		// Do not flag updates if no values changed
+		if(struct_match(_changed, _props)) {
+			return;	
+		}
 		reflex_flagUpdates();
 		
 		if(onUpdate != undefined) {
-			onUpdate();	
+			onUpdate(self);	
 		}
 	}
 	

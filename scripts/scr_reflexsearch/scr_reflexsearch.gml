@@ -23,6 +23,14 @@ function ReflexSearchVisitor(_searchRoutine) constructor {
 		return results;
 	}
 	
+	static runFirstSearch = function(_searchParams) {
+		runSearch(_searchParams);
+		if array_length(results) >= 1
+			return results[0];
+		
+		return noone;
+	}
+	
 	static find = function(_control) {
 		if(_control.hasChildren()) {
 			for(var i = 0; i < array_length(_control.children); i++) {
@@ -39,17 +47,9 @@ function ReflexSearchVisitor(_searchRoutine) constructor {
 }
 
 global.reflex_searchRoutines = {
-	findByPoint : new ReflexSearchVisitor(reflex_findControlAtPointImp)
-}
-
-
-function reflex_findFirstControlAtPoint(_x, _y) {
-	var _search = global.reflex_searchRoutines.findByPoint.runSearch({ x : _x, y : _y });
-	if (array_length(_search) > 1) {
-		return _search[0];
-	}
-	
-	return noone;
+	findByPoint : new ReflexSearchVisitor(reflex_findControlAtPointImp),
+	findById : new ReflexSearchVisitor(reflex_findByIdImp),
+	findByFocusEnabled: new ReflexSearchVisitor(reflex_findFocusEnabledImp)
 }
 
 function reflex_findControlsAtPoint(_x, _y) {
@@ -58,4 +58,23 @@ function reflex_findControlsAtPoint(_x, _y) {
 
 function reflex_findControlAtPointImp(_control, _searchParams) {
 	return _control.boxModel.contains(_searchParams.x, _searchParams.y);
+}
+
+function reflex_findById(_id) {
+	return global.reflex_searchRoutines.findById.runFirstSearch({ id : _id });
+}
+
+function reflex_findByIdImp(_control, _searchParams) {
+	if(variable_struct_empty(_control, "id"))
+		return false;
+		
+	return _control.id == _searchParams.id;
+}
+
+function reflex_findFocusEnabled() {
+	return global.reflex_searchRoutines.findByFocusEnabled.runSearch({});	
+}
+
+function reflex_findFocusEnabledImp(_control, _searchParams) {
+	return !variable_struct_empty(_control, "focusOrder");
 }

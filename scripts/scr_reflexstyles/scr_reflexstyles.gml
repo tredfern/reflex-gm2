@@ -10,6 +10,10 @@ enum reflex_styleProperty {
 	inherit = -32544
 }
 
+#macro REFLEX_AUTO -32543
+#macro REFLEX_OFF noone
+
+
 global.reflexStyles = {
 	__base: { 
 		x : 0, y :0, width : -1, height : -1, 
@@ -128,9 +132,15 @@ function reflex_removeMouseOverStyle(_control) {
 }
 
 function reflex_applyFocusStyle(_control) {
-	
+	if (variable_struct_exists(_control, "focusStyle")) {
+		var _cache = structShallowCopy(_control.focusStyle, _control);
+		_control.__focusStyleCache = _cache;
+	}
 }
 
 function reflex_removeFocusStyle(_control) {
-	
+	if(!variable_struct_empty(_control, "__focusStyleCache")) {
+		structShallowCopy(_control.__focusStyleCache, _control);
+		_control.__focusStyleCache = noone;
+	}
 }
