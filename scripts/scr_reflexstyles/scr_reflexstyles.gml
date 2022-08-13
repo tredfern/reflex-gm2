@@ -37,6 +37,10 @@ global.reflexStyles = {
 	container : {
 		
 	},
+	image : {
+		display : reflex_display.inline,
+		color: c_white
+	},
 	menu : {
 		
 	},

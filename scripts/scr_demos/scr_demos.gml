@@ -42,6 +42,28 @@ function initializeDemo() {
 			halign: fa_center,
 			valign: fa_middle
 		},
+		character_option : {
+			backgroundColor : c_olive,
+			display: reflex_display.inline,
+			width: 200,
+			height: 200,
+			margin: 1,
+			hoverStyle: {
+				backgroundColor : color_lighten(c_olive, 1.25)	
+			}
+		},
+		character_image : {
+			width: 0.8,
+			height: 0.8,
+			halign: fa_center,
+			valign: fa_top,
+			margin: { top : 10 }
+		},
+		character_name : {
+			halign: fa_center,
+			valign: fa_bottom,
+			margin: { top: 5, bottom: 5 }
+		},
 		heading : {
 			font : fnt_defaultHeading,
 			halign: fa_center
@@ -127,15 +149,15 @@ function showCharacterSelectDemo() {
 			]),
 			new ReflexContainer({ styles: "character_list" }, [
 				new ReflexContainer({ styles: "character_option" }, [
-					new ReflexImage({ styles: "character_image" }),
+					new ReflexImage({ styles: "character_image", image: spr_reflexDemoPortrait1 }),
 					new ReflexText({ styles: "character_name", text : "Pogo" })
 				]),
 				new ReflexContainer({ styles: "character_option" }, [
-					new ReflexImage({ styles: "character_image" }),
+					new ReflexImage({ styles: "character_image", image: spr_reflexDemoPortrait2 }),
 					new ReflexText({ styles: "character_name", text : "Migo" })
 				]),
 				new ReflexContainer({ styles: "character_option" }, [
-					new ReflexImage({ styles: "character_image" }),
+					new ReflexImage({ styles: "character_image", image: spr_reflexDemoPortrait3 }),
 					new ReflexText({ styles: "character_name", text : "Logo" })
 				]),
 				
