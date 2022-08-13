@@ -9,10 +9,16 @@
 /// 4. Should control change focus to a different control?
 /// 5. Is the gamepad moving and should select another control?
 /// 6. Is a gamepad button down and should trigger the focused control?
+
+
+#macro REFLEX_CHANGE_FOCUS_DELAY 0.2
+
 global.reflexInput = {
 	focusList : [],
 	focusedControl : noone,
-	mouseOver : noone
+	mouseOver : noone,
+	gameController : noone,
+	allowFocusChange : true
 };
 
 function reflex_processInput() {
@@ -49,16 +55,18 @@ function reflex_processInput() {
 		var _focusList = reflex_findFocusEnabled();
 		var _index = array_find(_focusList, global.reflexInput.focusedControl);
 
-		if keyboard_check_pressed(vk_up) || keyboard_check_pressed(vk_left) {
+		if reflex_moveToPreviousControl() {
 			_index--;
-		} else if keyboard_check_pressed(vk_down) || keyboard_check_pressed(vk_right) {
+		} else if reflex_moveToNextControl() {
 			_index++;
 		}
 		_index = clamp(_index, 0, array_length(_focusList) - 1);
 		
 		reflex_setFocus(_focusList[_index]);
-		
 	}
+	
+	//Trigger click event on control if an "Accept" button is pressed
+	
 
 }
 
@@ -71,14 +79,50 @@ function reflex_setFocus(_control) {
 	global.reflexInput.focusedControl = _control;
 }
 
+
+function reflex_allowFocusChange() {
+	global.reflexInput.allowFocusChange = true;	
+}
+
 function reflex_shouldChangeFocus() {
-	//check keyboard
-	if keyboard_check_pressed(vk_up) || keyboard_check_pressed(vk_down) ||
-		keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_left) {
-		return true;		
+	if(!global.reflexInput.allowFocusChange)
+		return false;
+	
+	if reflex_moveToPreviousControl() || reflex_moveToNextControl() {
+		var _t = time_source_create(time_source_global, REFLEX_CHANGE_FOCUS_DELAY, time_source_units_seconds, reflex_allowFocusChange)
+		time_source_start(_t);
+		global.reflexInput.allowFocusChange = false;
+		return true;
 	}
 	
 	return false;
+}
+
+function reflex_moveToPreviousControl() {
+	if(reflex_gameControllerEnabled()) {
+		var _gp = global.reflexInput.gameController;
+		if (gamepad_button_check(_gp, gp_padl) || gamepad_button_check(_gp, gp_padu))
+			return true;
+			
+		if(gamepad_axis_value(_gp, gp_axislh) < 0 || gamepad_axis_value(_gp, gp_axislv) < 0)
+			return true;
+	}
+	
+	return keyboard_check(vk_up) || keyboard_check(vk_left);
+}
+
+
+function reflex_moveToNextControl() {
+	if(reflex_gameControllerEnabled()) {
+		var _gp = global.reflexInput.gameController;
+		if (gamepad_button_check(_gp, gp_padr) || gamepad_button_check(_gp, gp_padd))
+			return true;
+		
+		if(gamepad_axis_value(_gp, gp_axislh) > 0 || gamepad_axis_value(_gp, gp_axislv) > 0)
+			return true;
+	}
+	
+	return keyboard_check(vk_down) || keyboard_check(vk_right);
 }
 
 function reflex_doMouseExit(_mouseOver) {
@@ -112,4 +156,8 @@ function reflex_doMouseUp(_mouseOver) {
 	if (mouse_check_button_released(mb_any)) {
 		array_onEach(_mouseOver, reflex_processMouseUp);	
 	}
+}
+
+function reflex_gameControllerEnabled() {
+	return global.reflexInput.gameController != noone;	
 }

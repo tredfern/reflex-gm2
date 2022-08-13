@@ -1,5 +1,4 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description Process all the inputs for the reflex library
 
 reflex_processStep();
 
