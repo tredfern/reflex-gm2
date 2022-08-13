@@ -24,7 +24,9 @@ global.reflexStyles = {
 		margin: 0,
 		color: reflex_styleProperty.inherit,
 		backgroundColor: noone,
-		font: reflex_styleProperty.inherit
+		font: reflex_styleProperty.inherit,
+		borderColor: noone,
+		border: 0
 	},
 	button : {
 		backgroundColor : c_ltgray,

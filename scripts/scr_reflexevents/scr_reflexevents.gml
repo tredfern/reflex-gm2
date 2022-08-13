@@ -51,3 +51,15 @@ function reflex_processBlur(_control) {
 	reflex_processEvent(_control, "onBlur");	
 }
 
+function reflex_processAcceptButton(_control) {
+	reflex_processEvent(_control, "onClick");	
+}
+
+function reflex_processCancelButton(_control) {
+	if !reflex_processEvent(_control, "onCancel", true) {
+		var _handler = reflex_findCancelHandler();
+		if _handler != noone {
+			reflex_processEvent(_handler, "onCancel");	
+		}
+	}
+}

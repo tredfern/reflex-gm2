@@ -19,13 +19,19 @@ function initializeDemo() {
 		test_menu: {
 			halign: fa_center,
 			valign: fa_middle,
-			padding: 20,
-			display: reflex_display.inline
+			padding: 0,
+			width: .50,
+			backgroundColor: c_dkgray
 		},
 		test_menu_option: {
 			color: c_green,
 			padding: 20,
-			font: fnt_defaultText
+			font: fnt_defaultHeading,
+			focusOrder: REFLEX_AUTO,
+			halign: fa_center,
+			focusStyle: {
+				backgroundColor: c_ltgray	
+			}
 		},
 		test_button: {
 			margin : 5,
@@ -33,7 +39,13 @@ function initializeDemo() {
 			backgroundColor: c_lime,
 			font: fnt_defaultHeading,
 			color: c_black,
-			halign: fa_center
+			halign: fa_center,
+			focusOrder: REFLEX_AUTO,
+			border: 3,
+			borderColor: noone,
+			focusStyle: {
+				borderColor: c_black
+			}
 		},
 		character_window : {
 			backgroundImage : spr_frame,
@@ -152,7 +164,8 @@ function showBackButton() {
 	reflex_render(new ReflexButton({
 		styles : "back_button",
 		caption : "Back",
-		onClick: function() { showTitleScreen(); }
+		onClick: function() { showTitleScreen(); },
+		onCancel: function() { showTitleScreen(); }
 	}));
 }
 

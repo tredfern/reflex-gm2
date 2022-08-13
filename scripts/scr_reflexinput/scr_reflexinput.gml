@@ -53,19 +53,25 @@ function reflex_processInput() {
 	if reflex_shouldChangeFocus() {
 		//Update Focus
 		var _focusList = reflex_findFocusEnabled();
-		var _index = array_find(_focusList, global.reflexInput.focusedControl);
-
-		if reflex_moveToPreviousControl() {
-			_index--;
-		} else if reflex_moveToNextControl() {
-			_index++;
-		}
-		_index = clamp(_index, 0, array_length(_focusList) - 1);
 		
-		reflex_setFocus(_focusList[_index]);
+		if(is_array(_focusList) && array_length(_focusList) > 0 ) {
+			var _index = array_find(_focusList, global.reflexInput.focusedControl);
+
+			if reflex_moveToPreviousControl() {
+				_index--;
+			} else if reflex_moveToNextControl() {
+				_index++;
+			}
+			_index = clamp(_index, 0, array_length(_focusList) - 1);
+		
+			reflex_setFocus(_focusList[_index]);
+		}
 	}
 	
 	//Trigger click event on control if an "Accept" button is pressed
+	if !reflex_doAcceptButton() {
+		reflex_doCancelButton();	
+	}
 	
 
 }
@@ -141,7 +147,7 @@ function reflex_doMouseOver(_mouseOver) {
 
 
 function reflex_doClick(_mouseOver) {
-	if(mouse_check_button_pressed(mb_left)) {
+	if(mouse_check_button_pressed(mb_left) ) {
 		array_onEach(_mouseOver, reflex_processClick);
 	}
 }
@@ -160,4 +166,33 @@ function reflex_doMouseUp(_mouseOver) {
 
 function reflex_gameControllerEnabled() {
 	return global.reflexInput.gameController != noone;	
+}
+
+function reflex_doAcceptButton() {
+	if (keyboard_check_pressed(vk_enter)) {
+		reflex_processAcceptButton(global.reflexInput.focusedControl);
+		return true;
+	}
+	
+	if (reflex_gameControllerEnabled() && gamepad_button_check_pressed(global.reflexInput.gameController, gp_face1)) {
+		reflex_processAcceptButton(global.reflexInput.focusedControl);
+		return true;
+	}
+	
+	return false;
+}
+
+
+function reflex_doCancelButton() {
+	if (keyboard_check_pressed(vk_escape)) {
+		reflex_processCancelButton(global.reflexInput.focusedControl);
+		return true;
+	}
+	
+	if (reflex_gameControllerEnabled() && gamepad_button_check_pressed(global.reflexInput.gameController, gp_face2)) {
+		reflex_processCancelButton(global.reflexInput.focusedControl);
+		return true;
+	}
+	
+	return false;
 }
