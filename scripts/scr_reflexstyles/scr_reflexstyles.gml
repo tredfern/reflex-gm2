@@ -7,7 +7,9 @@
 /// on style properties passed in.
 
 enum reflex_styleProperty {
-	inherit = -32544
+	inherit = -32544,
+	auto = -32543,
+	off = noone,
 }
 
 enum reflex_display {
@@ -15,10 +17,6 @@ enum reflex_display {
 	inline,
 	content
 }
-
-#macro REFLEX_AUTO -32543
-#macro REFLEX_OFF noone
-
 
 global.reflexStyles = {
 	__base: { 

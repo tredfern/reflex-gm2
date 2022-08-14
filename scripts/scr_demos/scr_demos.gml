@@ -27,7 +27,7 @@ function initializeDemo() {
 			color: c_green,
 			padding: 20,
 			font: fnt_defaultHeading,
-			focusOrder: REFLEX_AUTO,
+			focusOrder: reflex_styleProperty.auto,
 			halign: fa_center,
 			focusStyle: {
 				backgroundColor: c_ltgray	
@@ -40,7 +40,7 @@ function initializeDemo() {
 			font: fnt_defaultHeading,
 			color: c_black,
 			halign: fa_center,
-			focusOrder: REFLEX_AUTO,
+			focusOrder: reflex_styleProperty.auto,
 			border: 3,
 			borderColor: noone,
 			focusStyle: {
@@ -61,7 +61,7 @@ function initializeDemo() {
 			width: 320,
 			height: 220,
 			margin: 1,
-			focusOrder: REFLEX_AUTO,
+			focusOrder: reflex_styleProperty.auto,
 			border: 3,
 			borderColor: noone,
 			hoverStyle: {
@@ -190,7 +190,7 @@ function showCharacterSelectDemo() {
 				onUpdate : function(_self) {
 					if(!variable_struct_empty(_self, "characterStats")) {
 						_self.setChildren([
-							new ReflexContainer({styles : "character_option", valign: fa_middle, focusOrder: REFLEX_OFF }, [ 
+							new ReflexContainer({styles : "character_option", valign: fa_middle, focusOrder: reflex_styleProperty.off }, [ 
 								new ReflexImage({ styles: "character_image", image: _self.characterStats.image }),
 								new ReflexText({ styles: "character_name", text: _self.characterStats.name }),
 								
