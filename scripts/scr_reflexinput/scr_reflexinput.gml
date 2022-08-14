@@ -94,6 +94,9 @@ function reflex_allowFocusChange() {
 }
 
 function reflex_shouldChangeFocus() {
+	if(global.reflexInput.focusedControl == noone)
+		return true;
+		
 	if(!global.reflexInput.allowFocusChange)
 		return false;
 	
@@ -128,6 +131,9 @@ function reflex_moveToPreviousControl() {
 
 
 function reflex_moveToNextControl() {
+	if(global.reflexInput.focusedControl == noone)
+		return true;
+		
 	if(reflex_gameControllerEnabled()) {
 		var _gp = global.reflexInput.gameController;
 		if (gamepad_button_check(_gp, gp_padr) || gamepad_button_check(_gp, gp_padd))

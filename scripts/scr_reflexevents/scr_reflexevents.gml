@@ -65,3 +65,12 @@ function reflex_processCancelButton(_control) {
 		}
 	}
 }
+
+function reflex_processUnmount(_control) {
+	// If control currently has focus, remove that
+	if (global.reflexInput.focusedControl == _control) {
+		global.reflexInput.focusedControl = noone;	
+	}
+	
+	reflex_processEvent(_control, "onUnmount");
+}

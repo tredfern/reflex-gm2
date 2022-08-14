@@ -18,23 +18,30 @@ function reflex_render(_controlTree) {
 }
 
 function reflex_clear() {
+	for(var i = array_length(global.reflex.rootControls) - 1; i >= 0 ; i--) {
+		reflex_unrender(global.reflex.rootControls[i]);
+	}
 	global.reflex.rootControls = [];	
 	reflex_flagUpdates();
 }
 
 function reflex_unrender(_controlTree) {
+	// If you have children, first unrender them
+	if(!variable_struct_empty(_controlTree, "children")) {
+		for(var i = array_length(_controlTree.children) - 1; i >= 0; i--) {
+			reflex_unrender(_controlTree.children[i]);	
+		}
+	}
+	
+	reflex_processUnmount(_controlTree);
 	if(!variable_struct_empty(_controlTree, "parent")) {
 		_controlTree.parent.removeChild(_controlTree);
-		
-		// If your parent was a root control, than just remove that too
-		if(array_contains(global.reflex.rootControls, _controlTree.parent)) {
-			array_remove(global.reflex.rootControls, _controlTree.parent);	
-		}
 	} else {
 		// Must be a root control, or not rendered at all
 		array_remove(global.reflex.rootControls, _controlTree);	
 	}
 }
+
 
 
 function reflex_processStep() {
@@ -49,6 +56,16 @@ function reflex_processStep() {
 		reflex_refreshLayout();
 		global.reflex.hasUpdates = false;
 	}
+	
+	reflex_keepTidy();
 }
 
+function reflex_keepTidy() {
+	for(var i = array_length(global.reflex.rootControls) - 1; i >= 0; i--) {
+		//If you have no children it's time to clean up
+		if(array_empty(global.reflex.rootControls[i].children)) {
+			array_delete(global.reflex.rootControls, i, 1);
+		}
+	}
+}
 
