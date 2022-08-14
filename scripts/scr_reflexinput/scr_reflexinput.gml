@@ -23,8 +23,8 @@ global.reflexInput = {
 
 function reflex_processInput() {
 	// Check Mouse Position
-	var _mouseX = window_mouse_get_x();
-	var _mouseY = window_mouse_get_y();
+	var _mouseX = device_mouse_x_to_gui(0);
+	var _mouseY = device_mouse_y_to_gui(0);
 
 	var _mouseOver = reflex_findControlsAtPoint(_mouseX, _mouseY);
 	
