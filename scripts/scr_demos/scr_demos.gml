@@ -30,6 +30,7 @@ function initializeDemo() {
 			focusOrder: reflex_styleProperty.auto,
 			halign: fa_center,
 			focusStyle: {
+				color: c_lime,
 				backgroundColor: c_ltgray	
 			}
 		},

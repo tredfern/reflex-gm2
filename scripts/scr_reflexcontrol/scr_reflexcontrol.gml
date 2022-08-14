@@ -3,6 +3,7 @@
 
 function ReflexControl(_name, _props = {}, _children = []) constructor {
 	name = _name;
+	inheritedProperties = [];
 	reflex_applyStyles(self, "__base");
 	reflex_applyStyles(self, name);
 	reflex_applyStyles(self, variable_struct_get(_props, "styles"));

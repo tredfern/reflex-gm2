@@ -107,13 +107,20 @@ function reflex_inheritProperties(_control) {
 	
 	var _names = variable_struct_get_names(_control);
 	
+	//Find inherited properties
 	for(var i = 0; i < array_length(_names); i++) {
 		if variable_struct_get(_control, _names[i]) == reflex_styleProperty.inherit {
-			//Parent should be already overridden if also set to inherit
-			variable_struct_set(_control, _names[i], 
-				variable_struct_get(_control.parent, _names[i]));
+			array_push(_control.inheritedProperties, _names[i]);
+			
 		}
 	}
+	
+	// Update inherited property values
+	for(var i = 0; i < array_length(_control.inheritedProperties); i++) {
+		variable_struct_set(_control, _control.inheritedProperties[i], 
+			variable_struct_get(_control.parent, _control.inheritedProperties[i]));
+	}
+	
 	
 	//Cascade any properties to children
 	if(!array_empty(_control.children)) {
@@ -123,32 +130,39 @@ function reflex_inheritProperties(_control) {
 	}
 }
 
-function reflex_applyMouseOverStyle(_control) {
-	if (variable_struct_exists(_control, "hoverStyle")) {
-		var _cache = structShallowCopy(_control.hoverStyle, _control);
-		_control.__hoverStyleCache = _cache;
+function reflex_applyTempStyle(_control, _styleName) {
+	if (variable_struct_exists(_control, _styleName)) {
+		var _style = variable_struct_get(_control, _styleName);
+		var _cache = structShallowCopy(_style, _control);
+		var _cacheName = "__" + _styleName + "Cache";
+		variable_struct_set(_control, _cacheName, _cache);
+		reflex_inheritProperties(_control);
 	}
+}
+
+function reflex_removeTempStyle(_control, _styleName) {
+	var _cacheName = "__" + _styleName + "Cache";
+		
+	if (variable_struct_exists(_control, _cacheName)) {
+		var _style = variable_struct_get(_control, _cacheName);
+		structShallowCopy(_style, _control);
+		variable_struct_set(_control, _cacheName, noone);
+		reflex_inheritProperties(_control);
+	}
+}
+
+function reflex_applyMouseOverStyle(_control) {
+	reflex_applyTempStyle(_control, "hoverStyle");
 }
 
 function reflex_removeMouseOverStyle(_control) {
-	if(!variable_struct_empty(_control, "__hoverStyleCache")) {
-		structShallowCopy(_control.__hoverStyleCache, _control);
-		_control.__hoverStyleCache = noone;
-	}
+	reflex_removeTempStyle(_control, "hoverStyle");
 }
 
 function reflex_applyFocusStyle(_control) {
-	show_debug_message("Setting Focus Style");
-	if (variable_struct_exists(_control, "focusStyle")) {
-		var _cache = structShallowCopy(_control.focusStyle, _control);
-		_control.__focusStyleCache = _cache;
-	}
-	show_debug_message("Finished setting Focus Style");
+	reflex_applyTempStyle(_control, "focusStyle");
 }
 
 function reflex_removeFocusStyle(_control) {
-	if(!variable_struct_empty(_control, "__focusStyleCache")) {
-		structShallowCopy(_control.__focusStyleCache, _control);
-		_control.__focusStyleCache = noone;
-	}
+	reflex_removeTempStyle(_control, "focusStyle");
 }
