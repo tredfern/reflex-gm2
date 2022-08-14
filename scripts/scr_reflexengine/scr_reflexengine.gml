@@ -6,6 +6,10 @@ global.reflex = {
 	}
 };
 
+function reflex_init() {
+	
+	
+}
 
 function reflex_flagUpdates() {
 	global.reflex.hasUpdates = true;
