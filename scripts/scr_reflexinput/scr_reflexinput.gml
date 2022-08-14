@@ -51,6 +51,8 @@ function reflex_processInput() {
 	
 	//Change focus to prev/next control because of keyboard/controller
 	if reflex_shouldChangeFocus() {
+		
+	
 		//Update Focus
 		var _focusList = reflex_findFocusEnabled();
 		
@@ -66,6 +68,7 @@ function reflex_processInput() {
 		
 			reflex_setFocus(_focusList[_index]);
 		}
+		
 	}
 	
 	//Trigger click event on control if an "Accept" button is pressed
@@ -73,7 +76,7 @@ function reflex_processInput() {
 		reflex_doCancelButton();	
 	}
 	
-
+	
 }
 
 function reflex_setFocus(_control) {
@@ -95,9 +98,15 @@ function reflex_shouldChangeFocus() {
 		return false;
 	
 	if reflex_moveToPreviousControl() || reflex_moveToNextControl() {
-		var _t = time_source_create(time_source_global, REFLEX_CHANGE_FOCUS_DELAY, time_source_units_seconds, reflex_allowFocusChange)
+		show_debug_message("reflex_createdTimesource start");
+		var _t = time_source_create(
+			time_source_global, 
+			REFLEX_CHANGE_FOCUS_DELAY, 
+			time_source_units_seconds, 
+			function() { global.reflexInput.allowFocusChange = true })
 		time_source_start(_t);
 		global.reflexInput.allowFocusChange = false;
+		show_debug_message("reflex_createdTimesource completed");
 		return true;
 	}
 	

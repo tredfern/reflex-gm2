@@ -38,7 +38,6 @@
     {"id":{"name":"fnt_defaultHeading","path":"fonts/fnt_defaultHeading/fnt_defaultHeading.yy",},"order":1,},
     {"id":{"name":"scr_reflexBoxModel","path":"scripts/scr_reflexBoxModel/scr_reflexBoxModel.yy",},"order":1,},
     {"id":{"name":"spr_reflexDemoPortrait1","path":"sprites/spr_reflexDemoPortrait1/spr_reflexDemoPortrait1.yy",},"order":1,},
-    {"id":{"name":"scr_reflexHelpers","path":"scripts/scr_reflexHelpers/scr_reflexHelpers.yy",},"order":2,},
     {"id":{"name":"rm_reflex","path":"rooms/rm_reflex/rm_reflex.yy",},"order":0,},
   ],
   "Options": [

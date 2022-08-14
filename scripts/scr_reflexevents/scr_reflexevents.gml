@@ -42,8 +42,10 @@ function reflex_processMouseUp(_control) {
 }
 
 function reflex_processFocus(_control) {
+	show_debug_message("reflex_processFocus");
 	reflex_applyFocusStyle(_control);
-	reflex_processEvent(_control, "onFocus");	
+	reflex_processEvent(_control, "onFocus");
+	show_debug_message("reflex_processFocus completed");
 }
 
 function reflex_processBlur(_control) {

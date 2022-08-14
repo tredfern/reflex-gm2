@@ -55,7 +55,7 @@ global.reflexStyles = {
 		
 	},
 	menu_option : {
-		
+		focusOrder: reflex_styleProperty.auto
 	},
 	menu_option_text : {
 		halign: fa_center	
@@ -138,10 +138,12 @@ function reflex_removeMouseOverStyle(_control) {
 }
 
 function reflex_applyFocusStyle(_control) {
+	show_debug_message("Setting Focus Style");
 	if (variable_struct_exists(_control, "focusStyle")) {
 		var _cache = structShallowCopy(_control.focusStyle, _control);
 		_control.__focusStyleCache = _cache;
 	}
+	show_debug_message("Finished setting Focus Style");
 }
 
 function reflex_removeFocusStyle(_control) {
