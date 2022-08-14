@@ -33,7 +33,7 @@ function reflex_maxWidth(_control, _parent = noone) {
 	return display_get_gui_width();
 }
 
-function reflex_maxHeight(_control, _parent = noone) {
+function reflex_maxHeight(_control, _parent = noone, _availableHeight = -1) {
 	var _padding = _control.boxModel.padding.top + _control.boxModel.padding.bottom;
 	var _margin = _control.boxModel.margin.top + _control.boxModel.margin.bottom;
 	var _border = _control.boxModel.border.top + _control.boxModel.border.bottom;
@@ -45,6 +45,10 @@ function reflex_maxHeight(_control, _parent = noone) {
 	
 	if(_control.height > 1)
 		return _control.height;
+	
+	if(_availableHeight > 0) {
+		return _availableHeight;	
+	}
 	
 	if(_parent != noone) {			
 		return _parent.contentHeight - _margin - _padding - _border;
@@ -89,7 +93,7 @@ function reflex_calculateHeight(_control, _parentBox, _contentHeight) {
 	return _contentHeight;
 }
 
-function reflex_calculateBoxModels(_control, _parent = noone) {
+function reflex_calculateBoxModels(_control, _parent = noone, _availableHeight = -1) {
 	_control.boxModel = new ReflexBoxModel(_control, _parent);
 	
 	if(variable_struct_exists(_control, "onLayout")) {
@@ -101,7 +105,7 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 		//Calculate Size based on child
 		_control.boxModel.setContentSize(
 			reflex_maxWidth(_control, _parent),
-			reflex_maxHeight(_control, _parent)
+			reflex_maxHeight(_control, _parent, _availableHeight)
 		);
 	
 		var _contentWidth = 0;
@@ -116,10 +120,10 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 		
 		for(var i = 0; i < array_length(_control.children); i++) {
 			var _child = _control.children[i];
-			reflex_calculateBoxModels(_child, _control.boxModel);
+			reflex_calculateBoxModels(_child, _control.boxModel, _maxHeight - _y);
 			var _box = _child.boxModel.getFullArea();
 			
-			// New Line
+			// New Content won't fit, new line...
 			if (_x + _box.getWidth() > _maxWidth) {
 				_x = 0;
 				_y += _lineHeight;
@@ -132,6 +136,13 @@ function reflex_calculateBoxModels(_control, _parent = noone) {
 			_lineHeight = max(_lineHeight, _box.getHeight());
 			_contentWidth = max(_contentWidth, _x);
 			_contentHeight = max(_contentHeight, _y + _lineHeight);
+			
+			// This content will force a new line anyway, calculate that into the next row
+			if (_x == _maxWidth) {
+				_x = 0;
+				_y += _lineHeight;
+				_lineHeight = 0;
+			}
 		}
 		
 		_control.boxModel.setContentSize(

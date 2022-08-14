@@ -180,32 +180,34 @@ function showCharacterSelectDemo() {
 					text: "Select Character"
 				})
 			]),
-			new ReflexContainer({ styles: "character_list" }, [
-				createCharacterOption("Pogo", spr_reflexDemoPortrait1, 100, 25, 12, "Average character with no weaknesses"),
-				createCharacterOption("Migo", spr_reflexDemoPortrait2, 80, 35, 8, "Glass cannon ready to take down anyone"),
-				createCharacterOption("Logo", spr_reflexDemoPortrait3, 140, 20, 15, "Defensive fortress that can soak up damage")				
-			]),
-			new ReflexContainer({
-				id: "character_details", 
-				styles: "character_details",
-				onUpdate : function(_self) {
-					if(!variable_struct_empty(_self, "characterStats")) {
-						_self.setChildren([
-							new ReflexContainer({styles : "character_option", valign: fa_middle, focusOrder: reflex_styleProperty.off }, [ 
-								new ReflexImage({ styles: "character_image", image: _self.characterStats.image }),
-								new ReflexText({ styles: "character_name", text: _self.characterStats.name }),
+			new ReflexContainer({}, [
+				new ReflexContainer({ styles: "character_list" }, [
+					createCharacterOption("Pogo", spr_reflexDemoPortrait1, 100, 25, 12, "Average character with no weaknesses"),
+					createCharacterOption("Migo", spr_reflexDemoPortrait2, 80, 35, 8, "Glass cannon ready to take down anyone"),
+					createCharacterOption("Logo", spr_reflexDemoPortrait3, 140, 20, 15, "Defensive fortress that can soak up damage")				
+				]),
+				new ReflexContainer({
+					id: "character_details", 
+					styles: "character_details",
+					onUpdate : function(_self) {
+						if(!variable_struct_empty(_self, "characterStats")) {
+							_self.setChildren([
+								new ReflexContainer({styles : "character_option", valign: fa_middle, focusOrder: reflex_styleProperty.off }, [ 
+									new ReflexImage({ styles: "character_image", image: _self.characterStats.image }),
+									new ReflexText({ styles: "character_name", text: _self.characterStats.name }),
 								
-							]),
-							new ReflexContainer({ styles: "character_stats" }, [
-								new ReflexText({ styles: "character_stat", text: "HP: " + string(_self.characterStats.hp) }),
-								new ReflexText({ styles: "character_stat", text: "ATK: " + string(_self.characterStats.atk) }),
-								new ReflexText({ styles: "character_stat", text: "DEF: " + string(_self.characterStats.def) }),
-								new ReflexText({ styles: "character_stat", text: _self.characterStats.desc }),
-							])
-						]);
+								]),
+								new ReflexContainer({ styles: "character_stats" }, [
+									new ReflexText({ styles: "character_stat", text: "HP: " + string(_self.characterStats.hp) }),
+									new ReflexText({ styles: "character_stat", text: "ATK: " + string(_self.characterStats.atk) }),
+									new ReflexText({ styles: "character_stat", text: "DEF: " + string(_self.characterStats.def) }),
+									new ReflexText({ styles: "character_stat", text: _self.characterStats.desc }),
+								])
+							]);
+						}
 					}
-				}
-			}, [])
+				}, [])
+			])
 		])
 	);
 	showBackButton();
