@@ -58,7 +58,7 @@ function initializeDemo() {
 		character_option : {
 			backgroundColor : c_olive,
 			display: reflex_display.inline,
-			width: 220,
+			width: 320,
 			height: 220,
 			margin: 1,
 			focusOrder: REFLEX_AUTO,
@@ -72,8 +72,8 @@ function initializeDemo() {
 			}
 		},
 		character_image : {
-			width: 0.8,
-			height: 0.8,
+			width: 0.5,
+			height: 0.5,
 			halign: fa_center,
 			valign: fa_top,
 			margin: { top : 10 }

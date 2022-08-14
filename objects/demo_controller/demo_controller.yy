@@ -25,7 +25,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Demo",
-    "path": "folders/Reflex/Demo.yy",
+    "path": "folders/Demo.yy",
   },
   "resourceVersion": "1.0",
   "name": "demo_controller",

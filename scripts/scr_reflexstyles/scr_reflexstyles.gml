@@ -10,6 +10,12 @@ enum reflex_styleProperty {
 	inherit = -32544
 }
 
+enum reflex_display {
+	block,
+	inline,
+	content
+}
+
 #macro REFLEX_AUTO -32543
 #macro REFLEX_OFF noone
 
@@ -44,7 +50,7 @@ global.reflexStyles = {
 		
 	},
 	image : {
-		display : reflex_display.inline,
+		display : reflex_display.content,
 		color: c_white
 	},
 	menu : {

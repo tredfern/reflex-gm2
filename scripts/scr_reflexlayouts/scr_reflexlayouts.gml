@@ -54,6 +54,10 @@ function reflex_maxHeight(_control, _parent = noone) {
 }
 
 function reflex_calculateWidth(_control, _parentBox, _contentWidth) {
+	// Check if we always use the content size
+	if(_control.display == reflex_display.content)
+		return _contentWidth;
+		
 	if(_control.width >= 0) {
 		if (_control.width < 1) {
 			// Calculate a percentage
@@ -70,6 +74,10 @@ function reflex_calculateWidth(_control, _parentBox, _contentWidth) {
 }
 
 function reflex_calculateHeight(_control, _parentBox, _contentHeight) {
+	// Check if we always use the content size
+	if(_control.display == reflex_display.content)
+		return _contentHeight;
+		
 	if(_control.height >=0) {
 		if (_control.height > 0 && _control.height < 1) {
 			// Calculate a percentage
@@ -160,4 +168,8 @@ function reflex_align(_alignment, _min, _max, _size) {
 		return _max - _size;
 	
 	return _min;
+}
+
+function reflex_isPercentage(_value) {
+	return _value > 0 && _value < 1;	
 }

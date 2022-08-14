@@ -6,14 +6,19 @@
 function ReflexImage(_props = {}, _children = []) 
 	: ReflexControl("image", _props, _children) constructor {
 	
-	static onLayout = function() {
-		if(width <= 0 ) {
-			width = sprite_get_width(image);
+	static onLayout = function(_boxModel) {
+		var _w = sprite_get_width(image);
+		var _h = sprite_get_height(image);
+		
+		
+		if(reflex_isPercentage(width)) {
+			_w *= width;
 		}
 		
-		if(height <= 0) {
-			height = sprite_get_height(image);
+		if(reflex_isPercentage(height)) {
+			_h *= height;
 		}
+		_boxModel.setContentSize(_w, _h);
 	}
 	
 	static onDraw = function(_rect) {
