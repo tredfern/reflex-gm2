@@ -80,6 +80,10 @@ function reflex_processInput() {
 }
 
 function reflex_setFocus(_control) {
+	if(is_string(_control)) {
+		_control = reflex_findById(_control);	
+	}
+	
 	if global.reflexInput.focusedControl != noone {
 		reflex_processBlur(global.reflexInput.focusedControl);
 	}

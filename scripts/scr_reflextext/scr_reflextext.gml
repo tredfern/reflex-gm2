@@ -16,6 +16,8 @@ function ReflexText(_props = {}, _children = []) :
 	}
 
 	static onDraw = function(_rect) {
+		draw_set_valign(fa_top);
+		draw_set_halign(fa_left);
 		draw_set_font(font);
 		draw_text_color(_rect.left, _rect.top, text, color, color, color, color, alpha);
 	}

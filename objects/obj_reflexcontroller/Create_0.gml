@@ -45,6 +45,11 @@ reflex_stylesheet({
 	menu_option_text : {
 		halign: fa_center	
 	},
+	progress_bar : {
+		color: c_blue,
+		backgroundColor: c_ltgray,
+		height: 10
+	},
 	root : {
 		color: c_black,
 		backgroundColor: noone,

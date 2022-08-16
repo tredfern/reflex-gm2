@@ -6,7 +6,7 @@
     "path": "folders/Reflex/Scripts/Utility.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_reflexStructExtensions",
+  "name": "scr_structExtensions",
   "tags": [],
   "resourceType": "GMScript",
 }

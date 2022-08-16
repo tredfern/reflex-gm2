@@ -74,3 +74,7 @@ function reflex_processUnmount(_control) {
 	
 	reflex_processEvent(_control, "onUnmount");
 }
+
+function reflex_processStepHandler(_control) {
+	reflex_processEvent(_control, "onStep");	
+}

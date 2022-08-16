@@ -132,6 +132,7 @@ function showTitleScreen() {
 			styles: "test_menu_option",
 			text: "Exit Game"
 		}),
+		new ReflexProgressBar({ value: 10, maxValue: 100 })
 	]));
 }
 

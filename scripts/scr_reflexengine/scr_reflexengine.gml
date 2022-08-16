@@ -1,5 +1,6 @@
 global.reflex = {
 	rootControls : [],
+	stepHandlers: [],
 	hasUpdates : false,
 	defaults : {
 		textFont : fnt_defaultText	
@@ -46,20 +47,25 @@ function reflex_unrender(_controlTree) {
 	}
 }
 
+function reflex_processUpdates() {
+	if (global.reflex.hasUpdates) {
+		reflex_refreshLayout();
+		global.reflex.stepHandlers = reflex_findStepHandlers();
+		global.reflex.hasUpdates = false;
+	}
+}
 
 
 function reflex_processStep() {
-	if (global.reflex.hasUpdates) {
-		reflex_refreshLayout();
-		global.reflex.hasUpdates = false;
-	}
+	reflex_processUpdates();
 	
 	reflex_processInput();	
-	
-	if (global.reflex.hasUpdates) {
-		reflex_refreshLayout();
-		global.reflex.hasUpdates = false;
+	if(is_array(global.reflex.stepHandlers)) {
+		for(var i = 0; i < array_length(global.reflex.stepHandlers); i++) {
+			reflex_processStepHandler(global.reflex.stepHandlers[i]);
+		}
 	}
+	reflex_processUpdates();
 	
 	reflex_keepTidy();
 }

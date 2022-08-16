@@ -49,8 +49,8 @@ function ReflexSearchVisitor(_searchRoutine) constructor {
 global.reflex_searchRoutines = {
 	findByPoint : new ReflexSearchVisitor(reflex_findControlAtPointImp),
 	findById : new ReflexSearchVisitor(reflex_findByIdImp),
-	findByFocusEnabled: new ReflexSearchVisitor(reflex_findFocusEnabledImp),
-	findCancelHandler: new ReflexSearchVisitor(reflex_findHandlerImp)
+	findHandler: new ReflexSearchVisitor(reflex_findHandlerImp),
+	findAll: new ReflexSearchVisitor(reflex_findAllImp)
 }
 
 function reflex_findControlsAtPoint(_x, _y) {
@@ -73,17 +73,25 @@ function reflex_findByIdImp(_control, _searchParams) {
 }
 
 function reflex_findFocusEnabled() {
-	return global.reflex_searchRoutines.findByFocusEnabled.runSearch({});	
-}
-
-function reflex_findFocusEnabledImp(_control, _searchParams) {
-	return !variable_struct_empty(_control, "focusOrder");
+	return global.reflex_searchRoutines.findHandler.runSearch({ handler: "focusOrder" });	
 }
 
 function reflex_findCancelHandler() {
-	return global.reflex_searchRoutines.findCancelHandler.runFirstSearch({ handler : "onCancel" });	
+	return global.reflex_searchRoutines.findHandler.runFirstSearch({ handler : "onCancel" });	
 }
 
 function reflex_findHandlerImp(_control, _searchParams) {
 	return !variable_struct_empty(_control, _searchParams.handler);
+}
+
+function reflex_findStepHandlers() {
+	return global.reflex_searchRoutines.findHandler.runSearch({ handler: "onStep" });	
+}
+
+function reflex_findAll() {
+	return global.reflex_searchRoutines.findAll.runSearch({});		
+}
+
+function reflex_findAllImp(_control, _searchParams) {
+	return true;	
 }
