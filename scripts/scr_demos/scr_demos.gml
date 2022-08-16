@@ -187,7 +187,7 @@ function showCharacterSelectDemo() {
 					createCharacterOption("Logo", spr_reflexDemoPortrait3, 140, 20, 15, "Defensive fortress that can soak up damage")				
 				]),
 				new ReflexContainer({
-					id: "character_details", 
+					controlId: "character_details", 
 					styles: "character_details",
 					onUpdate : function(_self) {
 						if(!variable_struct_empty(_self, "characterStats")) {

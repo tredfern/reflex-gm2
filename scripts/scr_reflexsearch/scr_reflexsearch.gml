@@ -62,14 +62,14 @@ function reflex_findControlAtPointImp(_control, _searchParams) {
 }
 
 function reflex_findById(_id) {
-	return global.reflex_searchRoutines.findById.runFirstSearch({ id : _id });
+	return global.reflex_searchRoutines.findById.runFirstSearch({ controlId : _id });
 }
 
 function reflex_findByIdImp(_control, _searchParams) {
-	if(variable_struct_empty(_control, "id"))
+	if(variable_struct_empty(_control, "controlId"))
 		return false;
 		
-	return _control.id == _searchParams.id;
+	return _control.controlId == _searchParams.controlId;
 }
 
 function reflex_findFocusEnabled() {
