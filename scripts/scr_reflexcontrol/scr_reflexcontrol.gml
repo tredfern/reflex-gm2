@@ -40,7 +40,7 @@ function ReflexControl(_name, _props = {}, _children = []) constructor {
 		}
 		reflex_flagUpdates();
 		
-		if(onUpdate != undefined) {
+		if(variable_struct_exists(self, "onUpdate")) {
 			onUpdate(self);	
 		}
 	}

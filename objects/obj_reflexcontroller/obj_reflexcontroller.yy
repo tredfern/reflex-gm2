@@ -30,7 +30,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Objects",
-    "path": "folders/Reflex/Objects.yy",
+    "path": "folders/Reflex/UI/Objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_reflexController",

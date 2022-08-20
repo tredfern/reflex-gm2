@@ -56,3 +56,11 @@ function variable_struct_empty(_struct, _name) {
 	
 	return true;
 }
+
+
+function variable_struct_get_default(_struct, _name, _default) {
+	if(!variable_struct_exists(_struct, _name))
+		return _default;
+	
+	return variable_struct_get(_struct, _name);
+}

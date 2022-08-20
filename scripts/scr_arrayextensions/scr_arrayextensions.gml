@@ -73,3 +73,14 @@ function array_without(_array, _filter) {
 	
 	return _out;
 }
+
+
+function array_map(_array, _map) {
+	var _out = [];
+	
+	for(var i = 0; i < array_length(_array); i++) {
+		array_push(_out, _map(_array[i]));
+	}
+	
+	return _out;
+}

@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "Engine",
-    "path": "folders/Reflex/Scripts/Engine.yy",
+    "path": "folders/Reflex/UI/Scripts/Engine.yy",
   },
   "resourceVersion": "1.0",
   "name": "scr_reflexDrawing",

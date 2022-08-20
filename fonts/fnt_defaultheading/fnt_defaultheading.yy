@@ -130,7 +130,7 @@
   "maintainGms1Font": false,
   "parent": {
     "name": "Fonts",
-    "path": "folders/Reflex/Fonts.yy",
+    "path": "folders/Reflex/UI/Fonts.yy",
   },
   "resourceVersion": "1.0",
   "name": "fnt_defaultHeading",

@@ -2,6 +2,10 @@
 /// ReflexDrawing routines handle the details of drawing out the control trees
 ///
 
+function reflex_isDrawable(_control) {
+	return variable_struct_exists(_control, "boxModel");
+}
+
 function reflex_drawAll() {
 	for(var i = 0; i < array_length(global.reflex.rootControls); i++) {
 		reflex_drawControl(global.reflex.rootControls[i]);	
@@ -9,6 +13,9 @@ function reflex_drawAll() {
 }
 
 function reflex_drawControl(_control) {
+	if(!reflex_isDrawable(_control))
+		return;
+		
 	reflex_drawBackground(_control);
 	reflex_drawBorder(_control);
 	

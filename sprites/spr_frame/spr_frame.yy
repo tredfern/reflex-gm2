@@ -94,7 +94,7 @@
   },
   "parent": {
     "name": "Sprites",
-    "path": "folders/Reflex/Sprites.yy",
+    "path": "folders/Reflex/UI/Sprites.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_frame",

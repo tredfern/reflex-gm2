@@ -6,7 +6,7 @@
     "path": "folders/Reflex/UI/Scripts/Controls.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_reflexMenu",
+  "name": "scr_reflexDynamicText",
   "tags": [],
   "resourceType": "GMScript",
 }

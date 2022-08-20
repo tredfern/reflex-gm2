@@ -47,8 +47,7 @@ reflex_stylesheet({
 	},
 	progress_bar : {
 		color: c_blue,
-		backgroundColor: c_ltgray,
-		height: 10
+		backgroundColor: c_ltgray
 	},
 	root : {
 		color: c_black,
