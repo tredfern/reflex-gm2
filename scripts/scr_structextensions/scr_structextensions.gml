@@ -64,3 +64,7 @@ function variable_struct_get_default(_struct, _name, _default) {
 	
 	return variable_struct_get(_struct, _name);
 }
+
+function variable_not_null(_v) {
+	return _v != undefined && _v != noone;	
+}

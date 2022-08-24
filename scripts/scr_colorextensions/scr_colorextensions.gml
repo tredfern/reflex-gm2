@@ -32,3 +32,17 @@ function color_lighten(_color, _adjust) {
 		_g * _adjust, 
 		_b * _adjust);
 }
+
+function color_get_hexrgb(_color) {
+	var _r = color_get_red(_color);
+	var _g = color_get_green(_color);
+	var _b = color_get_blue(_color);
+	
+	return string_tokenize(
+		"#{0}{1}{2}", [
+		dec_to_hex(_r, 2),
+		dec_to_hex(_g, 2),
+		dec_to_hex(_b, 2) ]
+	);
+	
+}

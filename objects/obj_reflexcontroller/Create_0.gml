@@ -15,7 +15,8 @@ reflex_stylesheet({
 		backgroundColor: noone,
 		font: reflex_styleProperty.inherit,
 		borderColor: noone,
-		border: 0
+		border: 0,
+		isVisible: true
 	},
 	button : {
 		backgroundColor : c_ltgray,
@@ -31,6 +32,9 @@ reflex_stylesheet({
 	},
 	container : {
 		
+	},
+	disabled: {
+		disabled: true	
 	},
 	image : {
 		display : reflex_display.content,

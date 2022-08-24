@@ -152,34 +152,34 @@ function reflex_moveToNextControl() {
 
 function reflex_doMouseExit(_mouseOver) {
 	var _exiting = array_without(global.reflexInput.mouseOver, _mouseOver);
-	array_onEach(_exiting, reflex_processMouseExit);
+	array_each(_exiting, reflex_processMouseExit);
 }
 
 function reflex_doMouseEnter(_mouseOver) {
 	var _entering = array_without(_mouseOver, global.reflexInput.mouseOver);
-	array_onEach(_entering, reflex_processMouseEnter);
+	array_each(_entering, reflex_processMouseEnter);
 }
 
 function reflex_doMouseOver(_mouseOver) {
-	array_onEach(_mouseOver, reflex_processMouseOver);
+	array_each(_mouseOver, reflex_processMouseOver);
 }
 
 
 function reflex_doClick(_mouseOver) {
 	if(mouse_check_button_pressed(mb_left) ) {
-		array_onEach(_mouseOver, reflex_processClick);
+		array_each(_mouseOver, reflex_processClick);
 	}
 }
 
 function reflex_doMouseDown(_mouseOver) {
 	if (mouse_check_button_pressed(mb_any)) {
-		array_onEach(_mouseOver, reflex_processMouseDown);
+		array_each(_mouseOver, reflex_processMouseDown);
 	}
 }
 
 function reflex_doMouseUp(_mouseOver) {
 	if (mouse_check_button_released(mb_any)) {
-		array_onEach(_mouseOver, reflex_processMouseUp);	
+		array_each(_mouseOver, reflex_processMouseUp);	
 	}
 }
 

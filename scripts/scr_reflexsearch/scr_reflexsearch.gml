@@ -58,6 +58,9 @@ function reflex_findControlsAtPoint(_x, _y) {
 }
 
 function reflex_findControlAtPointImp(_control, _searchParams) {
+	if(variable_struct_empty(_control, "boxModel"))
+		return false;
+		
 	return _control.boxModel.contains(_searchParams.x, _searchParams.y);
 }
 
@@ -81,7 +84,7 @@ function reflex_findCancelHandler() {
 }
 
 function reflex_findHandlerImp(_control, _searchParams) {
-	return !variable_struct_empty(_control, _searchParams.handler);
+	return _control.isEnabled() && !variable_struct_empty(_control, _searchParams.handler);
 }
 
 function reflex_findStepHandlers() {

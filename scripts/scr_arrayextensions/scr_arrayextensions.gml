@@ -11,6 +11,13 @@ function array_contains(_array, _searchFor) {
 	return false;
 }
 
+
+function array_each(_array, _function) {
+	for(var i = 0; i < array_length(_array); i++) {
+		_function(_array[i]);	
+	}
+}
+
 function array_empty(_array) {
 	if(is_array(_array))
 		return array_length(_array) == 0;
@@ -18,14 +25,48 @@ function array_empty(_array) {
 	return true;
 }
 
-function array_sum(_array, _lambda) {
-	var _sum = 0;
+function array_filter(_array, _filter, _filterData = undefined) {
+	var _results = [];
+	
 	for(var i = 0; i < array_length(_array); i++) {
-		_sum += _lambda(_array[i]);
+		if(_filter(_array[i], _filterData)) {
+			array_push(_results, _array[i]);
+		}
 	}
 	
-	return _sum;
+	return _results;
 }
+
+function array_find(_array, _value, _start = 0) {
+	for(var i = _start; i < array_length(_array); i++) {
+		if(_array[i] == _value)
+			return i;
+	}
+	
+	return -1;
+}
+
+function array_findWhere(_array, _filter, _filterData) {
+	for(var i = 0; i < array_length(_array); i++) {
+		if(_filter(_array[i], _filterData)) {
+			return _array[i];	
+		}
+	}
+	
+	return noone;
+}
+
+
+function array_map(_array, _map) {
+	var _out = [];
+	
+	for(var i = 0; i < array_length(_array); i++) {
+		array_push(_out, _map(_array[i]));
+	}
+	
+	return _out;
+}
+
 
 function array_pick(_array, _num) {
 	if(array_length(_array) <= _num)
@@ -42,25 +83,37 @@ function array_pick(_array, _num) {
 	return _out;
 }
 
-function array_find(_array, _value, _start = 0) {
-	for(var i = _start; i < array_length(_array); i++) {
-		if(_array[i] == _value)
-			return i;
-	}
-	
-	return -1;
-}
 
 function array_remove(_array, _value) {
 	var _index = array_find(_array, _value);
 	array_delete(_array, _index, 1);
 }
 
-function array_onEach(_array, _function) {
+
+function array_sum(_array, _lambda) {
+	var _sum = 0;
 	for(var i = 0; i < array_length(_array); i++) {
-		_function(_array[i]);	
+		_sum += _lambda(_array[i]);
 	}
+	
+	return _sum;
 }
+
+function array_union(_array1, _array2) {
+	var _out = [];
+	
+	//Just copy first array in, it should be fine
+	//TODO: this does present an interesting issue that if the first array is not unique?
+	array_copy(_out, 0, _array1, 0, array_length(_array1));
+	
+	for(var i = 0; i < array_length(_array2); i++) {
+		if(!array_contains(_out, _array2[i]))
+			array_push(_out, _array2[i]);
+	}
+	
+	return _out;
+}
+
 
 function array_without(_array, _filter) {
 	var _out = [];
@@ -74,13 +127,3 @@ function array_without(_array, _filter) {
 	return _out;
 }
 
-
-function array_map(_array, _map) {
-	var _out = [];
-	
-	for(var i = 0; i < array_length(_array); i++) {
-		array_push(_out, _map(_array[i]));
-	}
-	
-	return _out;
-}

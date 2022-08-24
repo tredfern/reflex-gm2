@@ -6,6 +6,7 @@
 
 function reflex_statsNewPeriod() {
 	global.reflex_stats.current = {};
+	global.reflex_stats.events = [];
 }
 
 function reflex_statsGetCurrent(_statID) {
@@ -30,10 +31,14 @@ function reflex_statsAdd(_statID, _value = 1) {
 		global.reflex_stats.current, _statID, variable_struct_get_default(global.reflex_stats.current, _statID, 0) + _value);
 }
 
+function reflex_statsUpdateTotal(_statID, _change) {
+	variable_struct_set(global.reflex_stats.totals, _statID, 
+		reflex_statsGetTotal(_statID) + _change );
+}
+
 // Increase our total for the stat
 function reflex_statsTotal(_statID) {
-	variable_struct_set(global.reflex_stats.totals, _statID, 
-		reflex_statsGetTotal(_statID) + reflex_statsGetCurrent(_statID));
+	reflex_statsUpdateTotal(_statID, reflex_statsGetCurrent(_statID));
 }
 
 function reflex_statsMax(_statID) {
@@ -52,12 +57,17 @@ function reflex_statsSave() {
 	ini_open(_slotName);
 	
 	for(var i = 0; i < array_length(_names); i++) {
-		ini_write_real(STATS_SECTION_TOTALS, _names[0], reflex_statsGetTotal(_names[i]));
-		ini_write_real(STATS_SECTION_MAXIMUM, _names[0], reflex_statsGetMax(_names[i]));
-		ini_write_real(STATS_SECTION_MINIMUM, _names[0], reflex_statsGetMin(_names[i]));
+		ini_write_real(STATS_SECTION_TOTALS, _names[i], reflex_statsGetTotal(_names[i]));
+		ini_write_real(STATS_SECTION_MAXIMUM, _names[i], reflex_statsGetMax(_names[i]));
+		ini_write_real(STATS_SECTION_MINIMUM, _names[i], reflex_statsGetMin(_names[i]));
 		
-		ini_write_string(STAT_NAMES_SECTION, string(i), _names[0]);
+		ini_write_string(STAT_NAMES_SECTION, string(i), _names[i]);
 	}
+}
+
+
+function reflex_statsGetSlotName() {
+	return global.reflex_stats.slotName;
 }
 
 function reflex_createStatsDB(_slotName) {
@@ -66,7 +76,8 @@ function reflex_createStatsDB(_slotName) {
 		totals: {},
 		maximum: {},
 		minimum: {},
-		current: {}
+		current: {},
+		events: []
 	}
 }
 

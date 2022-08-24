@@ -97,7 +97,11 @@ function reflex_calculateBoxModels(_control, _parent = noone, _availableHeight =
 	_control.boxModel = new ReflexBoxModel(_control, _parent);
 	
 	if(variable_struct_exists(_control, "onLayout")) {
-		_control.onLayout(_control.boxModel);	
+		_control.onLayout(
+			_control.boxModel, 
+			reflex_maxWidth(_control, _parent), 
+			reflex_maxHeight(_control, _parent, _availableHeight)
+		);	
 	}
 	
 	if(is_array(_control.children) && array_length(_control.children) > 0) {
@@ -119,6 +123,13 @@ function reflex_calculateBoxModels(_control, _parent = noone, _availableHeight =
 		var _maxHeight = _contentArea.getHeight();
 		
 		for(var i = 0; i < array_length(_control.children); i++) {
+			
+			//Skip current iteration
+			if(!_control.isVisible) {
+				show_debug_message("Control not visible");
+				continue;
+			}
+			
 			var _child = _control.children[i];
 			reflex_calculateBoxModels(_child, _control.boxModel, _maxHeight - _y);
 			var _box = _child.boxModel.getFullArea();
@@ -160,6 +171,9 @@ function reflex_calculateBoxModels(_control, _parent = noone, _availableHeight =
 }
 
 function reflex_cacheBoxModels(_control) {
+	if(variable_struct_empty(_control, "boxModel"))
+		return;
+		
 	_control.boxModel.calculateAreas();
 	if(is_array(_control.children) && array_length(_control.children) > 0) {
 		for(var i = 0; i < array_length(_control.children); i++) {

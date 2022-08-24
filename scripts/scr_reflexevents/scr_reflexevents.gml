@@ -3,6 +3,10 @@
 ///
 
 function reflex_processEvent(_control, _event, _raiseToParent = false) {
+	// Do not process event if disabled
+	if(variable_struct_get(_control, "disabled") == true)
+		return false;
+		
 	if variable_struct_exists(_control, _event) {
 		var _handler = variable_struct_get(_control, _event);
 		_handler(_control);

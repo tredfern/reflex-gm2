@@ -10,6 +10,10 @@ function tokenString(_string, _tokens) {
 	return _string;
 }
 
+function string_tokenize(_string, _tokens) {
+	return tokenString(_string, _tokens);	
+}
+
 function string_split(_string, _delim) {
 	var _nextPos = string_pos(_delim, _string);
 	var _currentPos = 1;
@@ -32,4 +36,8 @@ function string_split(_string, _delim) {
 	}
 	
 	return _out;
+}
+
+function string_notEmpty(_string) {
+	return is_string(_string) && string_length(_string) > 0;	
 }

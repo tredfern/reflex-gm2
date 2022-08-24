@@ -3,7 +3,7 @@
 ///
 
 function reflex_isDrawable(_control) {
-	return variable_struct_exists(_control, "boxModel");
+	return variable_struct_exists(_control, "boxModel") && _control.isVisible;
 }
 
 function reflex_drawAll() {

@@ -63,4 +63,9 @@ function ReflexControl(_name, _props = {}, _children = []) constructor {
 	static render = function() {
 		reflex_render(self);	
 	}
+	
+	static isEnabled = function() {
+		return variable_struct_get(self, "disabled") != true;	
+	}
+	
 }
